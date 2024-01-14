@@ -1,28 +1,17 @@
-import { useState } from 'react'
 import './App.css'
-import Home from './pages/Home'
-import Films from './pages/Films'
-import Film from './pages/Film'
-import Content from './components/Content'
-import { Routes, Route, Link } from 'react-router-dom'
+
+import Categories from './components/Categories'
+import Test from './components/Test'
 
 function App() {
 
 	return (
-		<>
-			<header>
-				<nav>
-					<Link to="/">Home</Link>
-					<Link to="/films">Films</Link>
-					<Link to="/film">Film</Link>
-				</nav>
-			</header>
-			<Routes>
-				<Route path='/' element={<Home></Home>}></Route>
-				<Route path='/films' element={<Films></Films>}></Route>
-				<Route path='/film' element={<Film></Film>}></Route>
-			</Routes>
-		</>
+		<div className="wrapper">
+			<div className="content">
+				<Categories></Categories>
+			</div>
+			<img className='poster' src="./src/assets/img/poster.webp" alt="cat" />
+		</div>
 	)
 }
 
