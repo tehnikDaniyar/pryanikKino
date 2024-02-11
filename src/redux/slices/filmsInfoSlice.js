@@ -14,8 +14,6 @@ export const getFilmsCategories = createAsyncThunk(
 	}
 );
 
-
-
 const initialState = {
 	categories: [
 	],
