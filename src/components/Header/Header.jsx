@@ -6,8 +6,10 @@ import { setThemeMode } from "../../redux/slices/statesSlice";
 
 
 export default function Header() {
+	const themeMode = useSelector(store => store.states.themeMode)
 
-	const [checked, setChecked] = useState(true);
+
+	const [checked, setChecked] = useState(themeMode == 'dark' ? true : false);
 	const dispatch = useDispatch();
 
 	const toggleTheme = () => {
@@ -26,7 +28,7 @@ export default function Header() {
 
 
 	return (
-		<div className={styles.header}>
+		<header className={styles.header}>
 			<div className={styles.logo}>
 				PryanikKino
 			</div>
@@ -34,9 +36,8 @@ export default function Header() {
 				<Switch
 					onChange={toggleTheme}
 					checked={checked}
-
 				></Switch>
 			</div>
-		</div>
+		</header>
 	)
 }
