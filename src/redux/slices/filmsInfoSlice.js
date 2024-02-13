@@ -10,13 +10,33 @@ export const getFilmsCategories = createAsyncThunk(
 			return data.genres
 		} catch (error) {
 			console.log(error);
+			return []
 		}
 	}
 );
 
+export const getTopFilms = createAsyncThunk(
+	'filmsInfo/getTopFilms',
+	async function (_, { rejectWithValue, dispatch }) {
+		try {
+			console.log('getTopFilms');
+			const data = filmsServices.getCollections('TOP_POPULAR_MOVIES');
+			return data;
+		} catch (error) {
+			console.log(error);
+			return []
+		}
+	}
+)
+
+
+
 const initialState = {
 	categories: [
 	],
+	topFilms: [
+
+	]
 }
 export const filmsInfoSlice = createSlice({
 	name: 'filmsInfo',
@@ -32,6 +52,12 @@ export const filmsInfoSlice = createSlice({
 			.addCase(
 				getFilmsCategories.fulfilled, (state, actions) => {
 					state.categories = actions.payload;
+				}
+			)
+			.addCase(
+				getTopFilms.fulfilled, (state, actions) => {
+					console.log(actions.payload);
+					state.topFilms = [...actions.payload.items]
 				}
 			)
 	}

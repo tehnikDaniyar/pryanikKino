@@ -1,9 +1,11 @@
 import react from "react";
 import Slider from "../../components/Slider/Slider";
-
+import { getTopFilms } from "../../redux/slices/filmsInfoSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 export default function Start() {
-
+	const dispatch = useDispatch();
 	const slides = [
 		{ url: 'https://masterpiecer-images.s3.yandex.net/f78d0bb06fd911eeb7a9261105627a54:upscaled' },
 		{ url: 'https://www.nastol.com.ua/pic/201702/1920x1200/nastol.com.ua-207574.jpg' },
@@ -12,9 +14,17 @@ export default function Start() {
 		{ url: 'https://photochki.pro/uploads/posts/2022-09/thumbs/1662222792_1-photochki-pro-p-krasivie-siski-krupnim-planom-krasivaya-er-1.jpg' }
 	]
 
+	useEffect(() => {
+		console.log('effect');
+		dispatch(getTopFilms());
+	}, []);
+
+	const topFilms = useSelector(store => store.filmsInfo.topFilms);
+	console.log(topFilms);
+
 	return (
 		<>
-			<Slider slides={slides}></Slider>
+			<Slider slides={topFilms} title={'Топовые фильмы'} getData={getTopFilms}></Slider>
 		</>
 	)
 }
