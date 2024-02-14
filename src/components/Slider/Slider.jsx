@@ -6,8 +6,7 @@ import { Navigation, Autoplay } from 'swiper/modules';
 
 
 
-export default function Slider({ slides, title, getData }) {
-	const [count, setCount] = useState(0);
+export default function Slider({ slides, title }) {
 
 	const swipperSlides = slides.map(slideInfo => {
 		return (
@@ -15,7 +14,12 @@ export default function Slider({ slides, title, getData }) {
 				key={slideInfo.kinopoiskId}
 				className={styles.swiperSlide}
 			>
-				<img className='_ibg' key={slideInfo.posterUrl} src={slideInfo.posterUrlPreview} alt="slide image" />
+				<img className={`${styles.image} _ibg`}
+					key={slideInfo.kinopoiskId}
+					src={slideInfo.posterUrlPreview}
+					alt="slide image"
+					onClick={() => console.log(slideInfo.kinopoiskId)}
+				/>
 				{slideInfo.nameRu}
 			</SwiperSlide>
 		)
@@ -27,8 +31,6 @@ export default function Slider({ slides, title, getData }) {
 
 	return (<>
 		<h2 className={styles.title}>{title}</h2>
-		<h3>count{count}</h3>
-		<button onClick={() => setCount(count + 1)}>+</button>
 		<Swiper
 			modules={[Navigation, Autoplay]}
 			spaceBetween={20}
@@ -39,8 +41,8 @@ export default function Slider({ slides, title, getData }) {
 			}}
 			navigation={{ nextEl: '#next', prevEl: '#prev' }}
 			className={styles.swiper}
-			speed={800}
-			autoplay={{ delay: 1000, disableOnInteraction: false }}
+			speed={1800}
+			autoplay={{ delay: 2000, disableOnInteraction: false }}
 			loop={true}
 		>
 			{swipperSlides}

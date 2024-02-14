@@ -1,8 +1,10 @@
 import react from "react";
 import Slider from "../../components/Slider/Slider";
 import { getTopFilms } from "../../redux/slices/filmsInfoSlice";
+import { getTop200Films } from "../../redux/slices/filmsInfoSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import RatinInd from "../../components/UI/RatingInd/RatingInd";
 
 export default function Start() {
 	const dispatch = useDispatch();
@@ -13,18 +15,31 @@ export default function Start() {
 		{ url: 'https://st.depositphotos.com/1441511/4815/i/450/depositphotos_48154545-stock-photo-woman-showing-perfect-buttocks.jpg' },
 		{ url: 'https://photochki.pro/uploads/posts/2022-09/thumbs/1662222792_1-photochki-pro-p-krasivie-siski-krupnim-planom-krasivaya-er-1.jpg' }
 	]
+	const getSlider = (collection, title) => {
+		return (
+			Boolean(collection.length)
+				? <Slider slides={collection} title={title}></Slider>
+				: 'ошибка загрузки данных с сервера, простите'
+		)
+	}
 
 	useEffect(() => {
 		console.log('effect');
 		dispatch(getTopFilms());
+		dispatch(getTop200Films());
 	}, []);
 
-	const topFilms = useSelector(store => store.filmsInfo.topFilms);
+	const { topFilms } = useSelector(store => store.filmsInfo.topFilmsInfo);
+	const { top200Films } = useSelector(store => store.filmsInfo.top200FilmsInfo);
+
 	console.log(topFilms);
+	console.log('TEST', Boolean(0) && 'dfdf');
 
 	return (
 		<>
-			<Slider slides={topFilms} title={'Топовые фильмы'} getData={getTopFilms}></Slider>
+			{getSlider(topFilms, 'топ новинок')}
+			{getSlider(top200Films, '200 лучших фильмов')}
+			{<RatinInd rating={8.7}></RatinInd>}
 		</>
 	)
 }

@@ -1,0 +1,27 @@
+.wrapper {
+	position: relative;
+	width: 200px;
+	height: 20px;
+	border: 1px solid yellow;
+	background-color: black;
+
+	.indicator {
+		position: absolute;
+		left: 0;
+		top: 0;
+		height: 100%;
+		background-color: yellow;
+	}
+
+	.stars {
+		position: absolute;
+		left: 0;
+		top: 0;
+		height: 100%;
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		z-index: 10;
+
+	}
+}

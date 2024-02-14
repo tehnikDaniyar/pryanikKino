@@ -29,14 +29,33 @@ export const getTopFilms = createAsyncThunk(
 	}
 )
 
+export const getTop200Films = createAsyncThunk(
+	'filmsInfo/getTop200Films',
+	async function (_, { rejectWithValue, dispatch }) {
+		try {
+			console.log('getTopFilms');
+			const data = filmsServices.getCollections('TOP_250_MOVIES');
+			return data;
+		} catch (error) {
+			console.log(error);
+			return []
+		}
+	}
+)
+
 
 
 const initialState = {
 	categories: [
 	],
-	topFilms: [
-
-	]
+	topFilmsInfo: {
+		topFilms: [],
+		isLoading: false
+	},
+	top200FilmsInfo: {
+		top200Films: [],
+		isLoading: false
+	}
 }
 export const filmsInfoSlice = createSlice({
 	name: 'filmsInfo',
@@ -57,7 +76,15 @@ export const filmsInfoSlice = createSlice({
 			.addCase(
 				getTopFilms.fulfilled, (state, actions) => {
 					console.log(actions.payload);
-					state.topFilms = [...actions.payload.items]
+					state.topFilmsInfo.topFilms = [...actions.payload.items];
+					state.topFilmsInfo.isLoading = true;
+				}
+			)
+			.addCase(
+				getTop200Films.fulfilled, (state, actions) => {
+					console.log(actions.payload);
+					state.top200FilmsInfo.top200Films = [...actions.payload.items];
+					state.top200FilmsInfo.isLoading = true;
 				}
 			)
 	}
