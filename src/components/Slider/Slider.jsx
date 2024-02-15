@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css/bundle';
 import styles from './stylesSlider.module.scss'
 import { Navigation, Autoplay } from 'swiper/modules';
+import RatinInd from "../UI/RatingInd/RatingInd";
 
 
 
@@ -20,7 +21,7 @@ export default function Slider({ slides, title }) {
 					alt="slide image"
 					onClick={() => console.log(slideInfo.kinopoiskId)}
 				/>
-				{slideInfo.nameRu}
+				<RatinInd rating={slideInfo.ratingKinopoisk}></RatinInd>
 			</SwiperSlide>
 		)
 	})

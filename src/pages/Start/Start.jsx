@@ -5,6 +5,7 @@ import { getTop200Films } from "../../redux/slices/filmsInfoSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import RatinInd from "../../components/UI/RatingInd/RatingInd";
+import styles from './stylesStart.module.scss'
 
 export default function Start() {
 	const dispatch = useDispatch();
@@ -36,10 +37,12 @@ export default function Start() {
 	console.log('TEST', Boolean(0) && 'dfdf');
 
 	return (
-		<>
-			{getSlider(topFilms, 'топ новинок')}
-			{getSlider(top200Films, '200 лучших фильмов')}
-			{<RatinInd rating={8.7}></RatinInd>}
-		</>
+		<section className={styles.startPage}>
+			<div className={styles.filter}></div>
+			<div className={styles.sliders}>
+				{getSlider(topFilms, 'топ новинок')}
+				{getSlider(top200Films, '200 лучших фильмов')}
+			</div>
+		</section>
 	)
 }

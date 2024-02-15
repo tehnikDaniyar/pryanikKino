@@ -1,12 +1,13 @@
 import react, { useState } from "react";
 import styles from './stylesRatingInd.module.scss'
-import stars from '../../../assets/img/Безымянный.png'
+import stars from '../../../assets/img/stars.png'
 
 
 export default function RatinInd({ rating }) {
 
 	const width = rating * 10;
 	console.log(width);
+
 
 	return (
 		<>
