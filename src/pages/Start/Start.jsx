@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import RatinInd from "../../components/UI/RatingInd/RatingInd";
 import styles from './stylesStart.module.scss'
+import CardFilm from "../../components/CardFilm/CardFilm";
 
 export default function Start() {
 	const dispatch = useDispatch();
@@ -41,6 +42,9 @@ export default function Start() {
 			<div className={styles.filter}></div>
 			<div className={styles.sliders}>
 				{getSlider(topFilms, 'топ новинок')}
+				{getSlider(top200Films, '200 лучших фильмов')}
+				{getSlider(top200Films, '200 лучших фильмов')}
+				{getSlider(top200Films, '200 лучших фильмов')}
 				{getSlider(top200Films, '200 лучших фильмов')}
 			</div>
 		</section>

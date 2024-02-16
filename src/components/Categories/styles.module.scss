@@ -1,12 +1,27 @@
+.wrapper {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0);
+	z-index: -2;
+
+	&.open {
+		background-color: rgba(0, 0, 0, 0.418);
+		z-index: 19;
+	}
+}
+
 .categories {
 	cursor: pointer;
 	position: fixed;
 	top: 70px;
 	z-index: 20;
-	width: 200px;
+	width: 210px;
 	margin: 0 auto;
 	box-shadow: 0 5px 20px black;
-	transform: translateX(-90%);
+	transform: translateX(-95%);
 	transition: all 0.3s linear;
 	background-color: rgb(54, 53, 53);
 	padding: 20px;
@@ -15,10 +30,11 @@
 	.title {
 		position: absolute;
 		top: 0;
-		right: -40%;
+		right: -50%;
 		transition: inherit;
 		padding: 2px;
 		background-color: #917070;
+		font-size: 20px;
 	}
 
 	&.open {
@@ -29,10 +45,11 @@
 		right: 0%;
 	}
 
+
 	.links {
 		display: flex;
 		flex-direction: column;
-		gap: 3px;
+		gap: 4px;
 		color: inherit;
 		overflow-y: scroll;
 		height: 100%;
@@ -44,6 +61,16 @@
 
 		&::-webkit-scrollbar-thumb {
 			background-color: #361a1a;
+		}
+
+		.link {
+			text-decoration: none;
+			font-size: 18px;
+			color: inherit;
+
+			&:hover {
+				color: red;
+			}
 		}
 	}
 

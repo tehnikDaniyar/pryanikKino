@@ -25,5 +25,24 @@ export default class filmsServices {
 		return await response.data
 	}
 
+	//?genres=17&order=RATING&type=FILM&ratingFrom=0&ratingTo=10&yearFrom=1000&yearTo=3000&page=1
+
+	static async getFilms(id) {
+		const response = await axios.get(`${baseUrl}`, {
+			headers: headers,
+			params: {
+				genres: id,
+				order: 'RATING',
+				type: 'FILM',
+				ratingFrom: 0,
+				ratingTo: 10,
+				yearFrom: 1000,
+				yearTo: 3000,
+				page: 1,
+				page: '1'
+			}
+		});
+		return await response.data
+	}
 }
 

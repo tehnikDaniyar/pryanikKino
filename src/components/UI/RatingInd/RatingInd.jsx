@@ -6,8 +6,6 @@ import stars from '../../../assets/img/stars.png'
 export default function RatinInd({ rating }) {
 
 	const width = rating * 10;
-	console.log(width);
-
 
 	return (
 		<>
@@ -17,7 +15,6 @@ export default function RatinInd({ rating }) {
 				</div>
 				<span className={styles.indicator} style={{ width: `${width}%` }}></span>
 			</div>
-			<button onClick={() => setWidth(width + 2)}>+</button>
 		</>
 	)
 }

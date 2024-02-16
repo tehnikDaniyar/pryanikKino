@@ -43,6 +43,22 @@ export const getTop200Films = createAsyncThunk(
 	}
 )
 
+export const getFilms = createAsyncThunk(
+	'filmsInfo/getFilms',
+	async function (id, { rejectWithValue, dispatch }) {
+		try {
+			console.log('getFilms');
+			const data = filmsServices.getFilms(id);
+			return data;
+		} catch (error) {
+			console.log(error);
+			return []
+		}
+	}
+)
+
+
+
 
 
 const initialState = {
@@ -55,8 +71,10 @@ const initialState = {
 	top200FilmsInfo: {
 		top200Films: [],
 		isLoading: false
-	}
+	},
+	films: []
 }
+
 export const filmsInfoSlice = createSlice({
 	name: 'filmsInfo',
 	initialState,
@@ -85,6 +103,12 @@ export const filmsInfoSlice = createSlice({
 					console.log(actions.payload);
 					state.top200FilmsInfo.top200Films = [...actions.payload.items];
 					state.top200FilmsInfo.isLoading = true;
+				}
+			)
+			.addCase(
+				getFilms.fulfilled, (state, actions) => {
+					console.log('getfilms', actions.payload);
+					state.films = [...actions.payload.items];
 				}
 			)
 	}
