@@ -34,18 +34,13 @@ export default function Start() {
 	const { topFilms } = useSelector(store => store.filmsInfo.topFilmsInfo);
 	const { top200Films } = useSelector(store => store.filmsInfo.top200FilmsInfo);
 
-	console.log(topFilms);
-	console.log('TEST', Boolean(0) && 'dfdf');
 
 	return (
 		<section className={styles.startPage}>
 			<div className={styles.filter}></div>
 			<div className={styles.sliders}>
 				{getSlider(topFilms, 'топ новинок')}
-				{getSlider(top200Films, '200 лучших фильмов')}
-				{getSlider(top200Films, '200 лучших фильмов')}
-				{getSlider(top200Films, '200 лучших фильмов')}
-				{getSlider(top200Films, '200 лучших фильмов')}
+				{getSlider(top200Films, 'топ 200 фильмов')}
 			</div>
 		</section>
 	)

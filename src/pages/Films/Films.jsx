@@ -5,24 +5,36 @@ import { useSelector, useDispatch } from "react-redux";
 import { getFilms } from "../../redux/slices/filmsInfoSlice";
 import { useParams } from "react-router-dom";
 
+
 export default function Films() {
 	console.log('FILMS')
 	const paramId = useParams().id;
-	console.log();
+	const collectionName = useParams().collection;
 	const dispatch = useDispatch();
 	const films = useSelector(store => store.filmsInfo.films);
-	const { id, genre } = useSelector(store => store.states.curentCategoryFilms);
 	const categories = useSelector(store => store.filmsInfo.categories)
+	console.log("collectionName", collectionName);
+
+	const titleName = () => {
+		if (paramId) {
+			return Boolean(categories.length) && categories[paramId - 1].genre
+		} else {
+			return collectionName;
+		}
+	};
 
 	useEffect(() => {
-		dispatch(getFilms(paramId))
-	}, [paramId])
+		if (paramId) {
+			dispatch(getFilms(paramId))
+		} else if (collectionName) {
 
+		}
+	}, [paramId]);
 
 
 	return (
 		<>
-			<h1 className={styles.title}>{Boolean(categories.length) && categories[paramId - 1].genre} </h1>
+			<h1 className={styles.title}>{titleName()} </h1>
 
 			<div className={styles.wrapper}>
 				{

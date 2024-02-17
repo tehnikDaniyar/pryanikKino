@@ -39,11 +39,11 @@ export default function CardFilm({ item }) {
 			<div className={styles.ratings}>
 				<div>
 					<span>Imbd</span>
-					<RatingInd rating={item.ratingImdb} title={'рейтинг Imdb'}></RatingInd>
+					<RatingInd rating={item.ratingImdb} width='150px'></RatingInd>
 				</div>
 				<div>
 					<span>Kinopoisk</span>
-					<RatingInd rating={item.ratingKinopoisk} title='рейтинг Kinopoisk'></RatingInd>
+					<RatingInd rating={item.ratingKinopoisk} width='150px'></RatingInd>
 				</div>
 			</div>
 

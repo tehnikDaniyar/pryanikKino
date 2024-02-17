@@ -82,6 +82,9 @@ export const filmsInfoSlice = createSlice({
 		setFilmsCategories: (state, action) => {
 			state.sortProperty = action.payload;
 		},
+		copyCollectionInFilms: (state, action) => {
+			state.films = action.payload
+		}
 	},
 
 	extraReducers: (builder) => {
@@ -113,5 +116,5 @@ export const filmsInfoSlice = createSlice({
 			)
 	}
 })
-export const { setFilmsCategories } = filmsInfoSlice.actions
+export const { setFilmsCategories, copyCollectionInFilms } = filmsInfoSlice.actions
 export default filmsInfoSlice.reducer

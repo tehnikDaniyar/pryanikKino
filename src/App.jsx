@@ -14,9 +14,10 @@ function App() {
 			children: [
 				{ path: '/', element: <Start></Start> },
 				{ path: '/films/:id', element: <Films></Films> },
+				{ path: '/films/collections/:collection', element: <Films></Films> },
 				{ path: '*', element: <ErrorPage></ErrorPage> }
 			],
-			errorElement: <ErrorPage></ErrorPage>
+			errorElement: <MainPage></MainPage>
 		}
 	])
 
