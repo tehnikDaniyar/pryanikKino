@@ -64,14 +64,8 @@ export const getFilms = createAsyncThunk(
 const initialState = {
 	categories: [
 	],
-	topFilmsInfo: {
-		topFilms: [],
-		isLoading: false
-	},
-	top200FilmsInfo: {
-		top200Films: [],
-		isLoading: false
-	},
+	topFilms: [],
+	top200Films: [],
 	films: []
 }
 
@@ -83,7 +77,7 @@ export const filmsInfoSlice = createSlice({
 			state.sortProperty = action.payload;
 		},
 		copyCollectionInFilms: (state, action) => {
-			state.films = action.payload
+			state.films = state[action.payload]
 		}
 	},
 
@@ -96,16 +90,13 @@ export const filmsInfoSlice = createSlice({
 			)
 			.addCase(
 				getTopFilms.fulfilled, (state, actions) => {
-					console.log(actions.payload);
-					state.topFilmsInfo.topFilms = [...actions.payload.items];
-					state.topFilmsInfo.isLoading = true;
+					state.topFilms = [...actions.payload.items];
 				}
 			)
 			.addCase(
 				getTop200Films.fulfilled, (state, actions) => {
 					console.log(actions.payload);
-					state.top200FilmsInfo.top200Films = [...actions.payload.items];
-					state.top200FilmsInfo.isLoading = true;
+					state.top200Films = [...actions.payload.items];
 				}
 			)
 			.addCase(

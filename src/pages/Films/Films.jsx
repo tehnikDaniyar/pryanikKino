@@ -4,7 +4,7 @@ import CardFilm from "../../components/CardFilm/CardFilm";
 import { useSelector, useDispatch } from "react-redux";
 import { getFilms } from "../../redux/slices/filmsInfoSlice";
 import { useParams } from "react-router-dom";
-
+import { copyCollectionInFilms } from "../../redux/slices/filmsInfoSlice";
 
 export default function Films() {
 	console.log('FILMS')
@@ -27,9 +27,9 @@ export default function Films() {
 		if (paramId) {
 			dispatch(getFilms(paramId))
 		} else if (collectionName) {
-
+			dispatch(copyCollectionInFilms(collectionName))
 		}
-	}, [paramId]);
+	}, [paramId, collectionName]);
 
 
 	return (

@@ -12,7 +12,7 @@ import { useParams } from "react-router-dom";
 
 
 
-export default function Slider({ slides, title }) {
+export default function Slider({ slides, title, collectionKey }) {
 
 	const dispatch = useDispatch();
 
@@ -35,8 +35,8 @@ export default function Slider({ slides, title }) {
 
 
 	return (<>
-		<h2 className={styles.title} onClick={() => dispatch(copyCollectionInFilms(slides))}>
-			<Link to={`/films/collections/${title}`}>
+		<h2 className={styles.title} onClick={() => dispatch(copyCollectionInFilms(collectionKey))}>
+			<Link to={`/films/collections/${collectionKey}`}>
 				{title}
 			</Link>
 		</h2>

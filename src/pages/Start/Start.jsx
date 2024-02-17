@@ -7,40 +7,41 @@ import { useEffect } from "react";
 import RatinInd from "../../components/UI/RatingInd/RatingInd";
 import styles from './stylesStart.module.scss'
 import CardFilm from "../../components/CardFilm/CardFilm";
+import Kino from "../Kino/Kino";
 
 export default function Start() {
 	const dispatch = useDispatch();
-	const slides = [
-		{ url: 'https://masterpiecer-images.s3.yandex.net/f78d0bb06fd911eeb7a9261105627a54:upscaled' },
-		{ url: 'https://www.nastol.com.ua/pic/201702/1920x1200/nastol.com.ua-207574.jpg' },
-		{ url: 'https://masterpiecer-images.s3.yandex.net/20e549c38dae11ee9d9456181a0358a2:upscaled' },
-		{ url: 'https://st.depositphotos.com/1441511/4815/i/450/depositphotos_48154545-stock-photo-woman-showing-perfect-buttocks.jpg' },
-		{ url: 'https://photochki.pro/uploads/posts/2022-09/thumbs/1662222792_1-photochki-pro-p-krasivie-siski-krupnim-planom-krasivaya-er-1.jpg' }
-	]
-	const getSlider = (collection, title) => {
+
+	const getSlider = (collection, title, key) => {
 		return (
 			Boolean(collection.length)
-				? <Slider slides={collection} title={title}></Slider>
+				? <Slider slides={collection} title={title} collectionKey={key}></Slider>
 				: 'ошибка загрузки данных с сервера, простите'
 		)
 	}
 
 	useEffect(() => {
-		console.log('effect');
 		dispatch(getTopFilms());
 		dispatch(getTop200Films());
 	}, []);
 
-	const { topFilms } = useSelector(store => store.filmsInfo.topFilmsInfo);
-	const { top200Films } = useSelector(store => store.filmsInfo.top200FilmsInfo);
+
+
+	const { topFilms } = useSelector(store => store.filmsInfo);
+	const { top200Films } = useSelector(store => store.filmsInfo);
+
+	// console.log(topFilms, top200Films);
 
 
 	return (
 		<section className={styles.startPage}>
-			<div className={styles.filter}></div>
+			<div className={styles.filter}>
+				<Kino></Kino>
+
+			</div>
 			<div className={styles.sliders}>
-				{getSlider(topFilms, 'топ новинок')}
-				{getSlider(top200Films, 'топ 200 фильмов')}
+				{getSlider(topFilms, 'топ новинок', "topFilms")}
+				{getSlider(top200Films, 'топ 200 фильмов', "top200Films")}
 			</div>
 		</section>
 	)
