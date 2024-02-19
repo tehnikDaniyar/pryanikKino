@@ -33,9 +33,10 @@ export default function Slider({ slides, title, collectionKey }) {
 		)
 	})
 
+	// onClick={() => dispatch(copyCollectionInFilms(collectionKey))}
 
 	return (<>
-		<h2 className={styles.title} onClick={() => dispatch(copyCollectionInFilms(collectionKey))}>
+		<h2 className={styles.title} >
 			<Link to={`/films/collections/${collectionKey}`}>
 				{title}
 			</Link>

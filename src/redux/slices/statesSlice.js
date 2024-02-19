@@ -7,6 +7,10 @@ const initialState = {
 		id: 1,
 		genre: 'триллер'
 	},
+	coverInfo: {
+		isCover: false,
+		coverUrl: ''
+	}
 }
 
 
@@ -21,7 +25,10 @@ export const statesSlice = createSlice({
 		setCurentCategoryFilms: (state, action) => {
 			state.curentCategoryFilms = { ...action.payload };
 		},
+		setCoverInfo: (state, action) => {
+			state.coverInfo = { ...action.payload }
+		}
 	},
 })
-export const { setThemeMode, setCurentCategoryFilms } = statesSlice.actions
+export const { setThemeMode, setCurentCategoryFilms, setCoverInfo } = statesSlice.actions
 export default statesSlice.reducer

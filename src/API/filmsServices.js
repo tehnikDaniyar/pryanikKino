@@ -44,5 +44,17 @@ export default class filmsServices {
 		});
 		return await response.data
 	}
+
+	static async getKinoOfId(id) {
+		const response = await axios.get(`${baseUrl}//${id}`, {
+			headers: headers,
+			// params: {
+			// 	id: id
+			// }
+		});
+		return await response.data
+	}
+
+
 }
 

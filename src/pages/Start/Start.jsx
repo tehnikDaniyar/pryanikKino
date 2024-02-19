@@ -20,10 +20,10 @@ export default function Start() {
 		)
 	}
 
-	useEffect(() => {
-		dispatch(getTopFilms());
-		dispatch(getTop200Films());
-	}, []);
+	// useEffect(() => {
+	// 	dispatch(getTopFilms());
+	// 	dispatch(getTop200Films());
+	// }, []);
 
 
 
@@ -36,8 +36,6 @@ export default function Start() {
 	return (
 		<section className={styles.startPage}>
 			<div className={styles.filter}>
-				<Kino></Kino>
-
 			</div>
 			<div className={styles.sliders}>
 				{getSlider(topFilms, 'топ новинок', "topFilms")}

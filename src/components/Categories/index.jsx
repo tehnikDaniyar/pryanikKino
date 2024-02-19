@@ -9,7 +9,6 @@ import { setCurentCategoryFilms } from '../../redux/slices/statesSlice';
 
 
 export default function Categories() {
-	console.log('CATEGORIES');
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -18,7 +17,6 @@ export default function Categories() {
 
 	const [isOpen, setisOpen] = useState(false);
 	const categories = useSelector(store => store.filmsInfo.categories);
-	console.log(categories.length);
 
 	return (
 		<>

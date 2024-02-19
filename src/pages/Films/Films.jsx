@@ -13,7 +13,9 @@ export default function Films() {
 	const dispatch = useDispatch();
 	const films = useSelector(store => store.filmsInfo.films);
 	const categories = useSelector(store => store.filmsInfo.categories)
-	console.log("collectionName", collectionName);
+	const catIsLoading = useSelector(store => store.filmsInfo.catIsLoading);
+	console.log(catIsLoading);
+
 
 	const titleName = () => {
 		if (paramId) {
@@ -27,9 +29,11 @@ export default function Films() {
 		if (paramId) {
 			dispatch(getFilms(paramId))
 		} else if (collectionName) {
-			dispatch(copyCollectionInFilms(collectionName))
+			dispatch(copyCollectionInFilms(collectionName));
 		}
-	}, [paramId, collectionName]);
+	}, [paramId, collectionName, catIsLoading]);
+
+
 
 
 	return (

@@ -19,7 +19,6 @@ export const getTopFilms = createAsyncThunk(
 	'filmsInfo/getTopFilms',
 	async function (_, { rejectWithValue, dispatch }) {
 		try {
-			console.log('getTopFilms');
 			const data = filmsServices.getCollections('TOP_POPULAR_MOVIES');
 			return data;
 		} catch (error) {
@@ -33,7 +32,6 @@ export const getTop200Films = createAsyncThunk(
 	'filmsInfo/getTop200Films',
 	async function (_, { rejectWithValue, dispatch }) {
 		try {
-			console.log('getTopFilms');
 			const data = filmsServices.getCollections('TOP_250_MOVIES');
 			return data;
 		} catch (error) {
@@ -47,7 +45,6 @@ export const getFilms = createAsyncThunk(
 	'filmsInfo/getFilms',
 	async function (id, { rejectWithValue, dispatch }) {
 		try {
-			console.log('getFilms');
 			const data = filmsServices.getFilms(id);
 			return data;
 		} catch (error) {
@@ -57,16 +54,30 @@ export const getFilms = createAsyncThunk(
 	}
 )
 
-
+export const getKino = createAsyncThunk(
+	'filmsInfo/getKino',
+	async function (id, { rejectWithValue, dispatch }) {
+		try {
+			const data = filmsServices.getKinoOfId(id);
+			return data;
+		} catch (error) {
+			console.log(error);
+			return {}
+		}
+	}
+)
 
 
 
 const initialState = {
 	categories: [
 	],
+	catIsLoading: false,
 	topFilms: [],
 	top200Films: [],
-	films: []
+	films: [],
+	kinoInfo: {},
+	kinoIsLoading: false
 }
 
 export const filmsInfoSlice = createSlice({
@@ -91,20 +102,28 @@ export const filmsInfoSlice = createSlice({
 			.addCase(
 				getTopFilms.fulfilled, (state, actions) => {
 					state.topFilms = [...actions.payload.items];
+					state.catIsLoading = true;
 				}
 			)
 			.addCase(
 				getTop200Films.fulfilled, (state, actions) => {
-					console.log(actions.payload);
 					state.top200Films = [...actions.payload.items];
+					state.catIsLoading = true;
 				}
 			)
 			.addCase(
 				getFilms.fulfilled, (state, actions) => {
-					console.log('getfilms', actions.payload);
 					state.films = [...actions.payload.items];
 				}
 			)
+			.addCase(
+				getKino.fulfilled, (state, actions) => {
+					console.log("getKino fulfilled");
+					state.kinoInfo = { ...actions.payload };
+					state.kinoIsLoading = true;
+				}
+			)
+
 	}
 })
 export const { setFilmsCategories, copyCollectionInFilms } = filmsInfoSlice.actions
