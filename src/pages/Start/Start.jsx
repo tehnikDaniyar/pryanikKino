@@ -8,6 +8,7 @@ import RatinInd from "../../components/UI/RatingInd/RatingInd";
 import styles from './stylesStart.module.scss'
 import CardFilm from "../../components/CardFilm/CardFilm";
 import Kino from "../Kino/Kino";
+import { getCollection } from "../../redux/slices/filmsInfoSlice";
 
 export default function Start() {
 	const dispatch = useDispatch();
@@ -25,12 +26,14 @@ export default function Start() {
 	// 	dispatch(getTop200Films());
 	// }, []);
 
+	useEffect(() => {
+		dispatch(getCollection({ page: 1, collectionName: "TOP_POPULAR_MOVIES" }))
+		dispatch(getCollection({ page: 1, collectionName: "TOP_250_MOVIES" }))
+	}, []);
 
 
-	const { topFilms } = useSelector(store => store.filmsInfo);
-	const { top200Films } = useSelector(store => store.filmsInfo);
-
-	// console.log(topFilms, top200Films);
+	const topFilms = useSelector(store => store.filmsInfo.TOP_POPULAR_MOVIES);
+	const top200Films = useSelector(store => store.filmsInfo.TOP_250_MOVIES);
 
 
 	return (
@@ -38,8 +41,8 @@ export default function Start() {
 			<div className={styles.filter}>
 			</div>
 			<div className={styles.sliders}>
-				{getSlider(topFilms, 'топ новинок', "topFilms")}
-				{getSlider(top200Films, 'топ 200 фильмов', "top200Films")}
+				{getSlider(topFilms, 'топ новинок', "TOP_POPULAR_MOVIES")}
+				{getSlider(top200Films, 'топ 200 фильмов', "TOP_250_MOVIES")}
 			</div>
 		</section>
 	)

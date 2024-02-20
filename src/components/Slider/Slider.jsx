@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { copyCollectionInFilms } from "../../redux/slices/filmsInfoSlice";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-
+import { setCurrentPage } from "../../redux/slices/filmsInfoSlice";
 
 
 
@@ -37,7 +37,10 @@ export default function Slider({ slides, title, collectionKey }) {
 
 	return (<>
 		<h2 className={styles.title} >
-			<Link to={`/films/collections/${collectionKey}`}>
+			<Link
+				to={`/films/collections/${collectionKey}`}
+				onClick={() => dispatch(setCurrentPage(1))}
+			>
 				{title}
 			</Link>
 		</h2>

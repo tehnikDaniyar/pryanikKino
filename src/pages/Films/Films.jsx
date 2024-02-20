@@ -5,16 +5,23 @@ import { useSelector, useDispatch } from "react-redux";
 import { getFilms } from "../../redux/slices/filmsInfoSlice";
 import { useParams } from "react-router-dom";
 import { copyCollectionInFilms } from "../../redux/slices/filmsInfoSlice";
+import { setCurrentPage } from "../../redux/slices/filmsInfoSlice";
+import { Pagination } from "@mui/material";
+import { getCollection } from "../../redux/slices/filmsInfoSlice";
 
 export default function Films() {
 	console.log('FILMS')
+	// dispatch()
+
 	const paramId = useParams().id;
 	const collectionName = useParams().collection;
 	const dispatch = useDispatch();
 	const films = useSelector(store => store.filmsInfo.films);
 	const categories = useSelector(store => store.filmsInfo.categories)
 	const catIsLoading = useSelector(store => store.filmsInfo.catIsLoading);
-	console.log(catIsLoading);
+	const currentPage = useSelector(store => store.filmsInfo.currentPage);
+	const totalPages = useSelector(store => store.filmsInfo.totalPages);
+
 
 
 	const titleName = () => {
@@ -27,18 +34,32 @@ export default function Films() {
 
 	useEffect(() => {
 		if (paramId) {
-			dispatch(getFilms(paramId))
+			dispatch(getFilms({ id: paramId, page: currentPage }))
 		} else if (collectionName) {
-			dispatch(copyCollectionInFilms(collectionName));
+			dispatch(getCollection({ page: currentPage, collectionName: collectionName }))
 		}
-	}, [paramId, collectionName, catIsLoading]);
 
 
+	}, [paramId, currentPage]);
 
+
+	const handleChange = (e, v) => {
+		dispatch(setCurrentPage(v))
+	}
 
 	return (
 		<>
 			<h1 className={styles.title}>{titleName()} </h1>
+			<Pagination
+				count={totalPages}
+				size="large"
+				className={styles.pagination}
+				page={currentPage}
+				onChange={handleChange}
+				variant="outlined"
+				shape="rounded"
+				color="primary"
+			></Pagination>
 
 			<div className={styles.wrapper}>
 				{

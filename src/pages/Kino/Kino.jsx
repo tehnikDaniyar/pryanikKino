@@ -11,6 +11,8 @@ import { xFrameBypass, customElementBuiltin } from "../../scripts/xFrameBypass";
 
 export default function Kino() {
 
+	window.scrollTo(0, 0)
+
 	const filmId = useParams().id;
 	const dispatch = useDispatch();
 	const { kinoInfo, kinoIsLoading } = useSelector(store => store.filmsInfo);

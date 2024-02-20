@@ -14,20 +14,26 @@ export default class filmsServices {
 		});
 		return await response.data
 	}
-	static async getCollections(query) {
+
+
+
+
+	static async getCollections(query, page) {
 		const response = await axios.get(`${baseUrl}/collections`, {
 			headers: headers,
 			params: {
 				type: query,
-				page: '1'
+				page: page,
 			}
 		});
 		return await response.data
 	}
 
+
+
 	//?genres=17&order=RATING&type=FILM&ratingFrom=0&ratingTo=10&yearFrom=1000&yearTo=3000&page=1
 
-	static async getFilms(id) {
+	static async getFilms(id, page, country) {
 		const response = await axios.get(`${baseUrl}`, {
 			headers: headers,
 			params: {
@@ -38,8 +44,9 @@ export default class filmsServices {
 				ratingTo: 10,
 				yearFrom: 1000,
 				yearTo: 3000,
-				page: 1,
-				page: '1'
+				page: page,
+				country: country,
+
 			}
 		});
 		return await response.data

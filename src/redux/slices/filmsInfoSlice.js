@@ -17,9 +17,9 @@ export const getFilmsCategories = createAsyncThunk(
 
 export const getTopFilms = createAsyncThunk(
 	'filmsInfo/getTopFilms',
-	async function (_, { rejectWithValue, dispatch }) {
+	async function ({ page }, { rejectWithValue, dispatch }) {
 		try {
-			const data = filmsServices.getCollections('TOP_POPULAR_MOVIES');
+			const data = filmsServices.getCollections('TOP_POPULAR_MOVIES', page);
 			return data;
 		} catch (error) {
 			console.log(error);
@@ -28,11 +28,28 @@ export const getTopFilms = createAsyncThunk(
 	}
 )
 
+export const getCollection = createAsyncThunk(
+	'filmsInfo/getCollection',
+	async function ({ page, collectionName }, { rejectWithValue, dispatch }) {
+		try {
+			console.log('GETCOLLECTION!!!!!!1');
+			const data = await filmsServices.getCollections(collectionName, page);
+			// console.log({ collectionName: collectionName, data: data });
+			return { collectionName: collectionName, data: data };
+		} catch (error) {
+			console.log(error);
+			return []
+		}
+	}
+)
+
+
+
 export const getTop200Films = createAsyncThunk(
 	'filmsInfo/getTop200Films',
-	async function (_, { rejectWithValue, dispatch }) {
+	async function ({ page }, { rejectWithValue, dispatch }) {
 		try {
-			const data = filmsServices.getCollections('TOP_250_MOVIES');
+			const data = filmsServices.getCollections('TOP_250_MOVIES', page);
 			return data;
 		} catch (error) {
 			console.log(error);
@@ -43,9 +60,9 @@ export const getTop200Films = createAsyncThunk(
 
 export const getFilms = createAsyncThunk(
 	'filmsInfo/getFilms',
-	async function (id, { rejectWithValue, dispatch }) {
+	async function ({ id, page }, { rejectWithValue, dispatch }) {
 		try {
-			const data = filmsServices.getFilms(id);
+			const data = filmsServices.getFilms(id, page);
 			return data;
 		} catch (error) {
 			console.log(error);
@@ -73,9 +90,13 @@ const initialState = {
 	categories: [
 	],
 	catIsLoading: false,
+	totalPages: 1,
 	topFilms: [],
 	top200Films: [],
+	TOP_POPULAR_MOVIES: [],
+	TOP_250_MOVIES: [],
 	films: [],
+	currentPage: 1,
 	kinoInfo: {},
 	kinoIsLoading: false
 }
@@ -89,6 +110,9 @@ export const filmsInfoSlice = createSlice({
 		},
 		copyCollectionInFilms: (state, action) => {
 			state.films = state[action.payload]
+		},
+		setCurrentPage: (state, action) => {
+			state.currentPage = action.payload;
 		}
 	},
 
@@ -102,18 +126,38 @@ export const filmsInfoSlice = createSlice({
 			.addCase(
 				getTopFilms.fulfilled, (state, actions) => {
 					state.topFilms = [...actions.payload.items];
+					state.films = [...actions.payload.items];
 					state.catIsLoading = true;
+					state.totalPages = actions.payload.totalPages;
 				}
 			)
 			.addCase(
 				getTop200Films.fulfilled, (state, actions) => {
 					state.top200Films = [...actions.payload.items];
+					state.films = [...actions.payload.items];
 					state.catIsLoading = true;
+					state.totalPages = actions.payload.totalPages;
 				}
 			)
+
+
+			.addCase(
+				getCollection.fulfilled, (state, actions) => {
+
+					state[actions.payload.collectionName] = actions.payload.data.items
+					state.films = [...actions.payload.data.items]; // for Films
+					state.catIsLoading = true;
+					state.totalPages = actions.payload.data.totalPages; // for pagination
+				}
+			)
+
+
+
 			.addCase(
 				getFilms.fulfilled, (state, actions) => {
 					state.films = [...actions.payload.items];
+					state.totalPages = actions.payload.totalPages;
+
 				}
 			)
 			.addCase(
@@ -126,5 +170,5 @@ export const filmsInfoSlice = createSlice({
 
 	}
 })
-export const { setFilmsCategories, copyCollectionInFilms } = filmsInfoSlice.actions
+export const { setFilmsCategories, copyCollectionInFilms, setCurrentPage } = filmsInfoSlice.actions
 export default filmsInfoSlice.reducer
