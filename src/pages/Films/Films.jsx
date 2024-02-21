@@ -8,10 +8,12 @@ import { copyCollectionInFilms } from "../../redux/slices/filmsInfoSlice";
 import { setCurrentPage } from "../../redux/slices/filmsInfoSlice";
 import { Pagination } from "@mui/material";
 import { getCollection } from "../../redux/slices/filmsInfoSlice";
+import { setOrder, setCountries, setType } from "../../redux/slices/filterSlice";
+import Filter from "../../components/Filter/Filter";
+
 
 export default function Films() {
 	console.log('FILMS')
-	// dispatch()
 
 	const paramId = useParams().id;
 	const collectionName = useParams().collection;
@@ -21,6 +23,7 @@ export default function Films() {
 	const catIsLoading = useSelector(store => store.filmsInfo.catIsLoading);
 	const currentPage = useSelector(store => store.filmsInfo.currentPage);
 	const totalPages = useSelector(store => store.filmsInfo.totalPages);
+	const { country, order, type } = useSelector(store => store.filter);
 
 
 
@@ -34,13 +37,13 @@ export default function Films() {
 
 	useEffect(() => {
 		if (paramId) {
-			dispatch(getFilms({ id: paramId, page: currentPage }))
+			dispatch(getFilms({ id: paramId, page: currentPage, country: country, order: order, type: type, }))
 		} else if (collectionName) {
 			dispatch(getCollection({ page: currentPage, collectionName: collectionName }))
 		}
 
 
-	}, [paramId, currentPage]);
+	}, [paramId, currentPage, order, type, country]);
 
 
 	const handleChange = (e, v) => {
@@ -50,6 +53,18 @@ export default function Films() {
 	return (
 		<>
 			<h1 className={styles.title}>{titleName()} </h1>
+
+			{
+				paramId &&
+
+				<Filter
+					handlers={{ setCountries, setOrder, setType }}
+					states={{ country, order, type }}
+				/>
+			}
+
+
+
 			<Pagination
 				count={totalPages}
 				size="large"
@@ -60,6 +75,8 @@ export default function Films() {
 				shape="rounded"
 				color="primary"
 			></Pagination>
+
+
 
 			<div className={styles.wrapper}>
 				{

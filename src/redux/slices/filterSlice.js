@@ -7,20 +7,30 @@ const initialState = {
 	genre: '',
 	order: '',
 	type: ''
-}
+};
 
 
 
 
 export const filterSlice = createSlice({
-	name: '',
+	name: 'filter',
 	initialState,
 	reducers: {
+		setCountries: (state, action) => {
+			state.country = action.payload
+		},
+		setOrder: (state, action) => {
+			state.order = action.payload
 
+		},
+		setType: (state, action) => {
+			state.type = action.payload
+
+		},
 	},
 });
 
 
 
-export const { } = filterSlice.actions
+export const { setCountries, setOrder, setType } = filterSlice.actions
 export default filterSlice.reducer

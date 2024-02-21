@@ -60,9 +60,10 @@ export const getTop200Films = createAsyncThunk(
 
 export const getFilms = createAsyncThunk(
 	'filmsInfo/getFilms',
-	async function ({ id, page }, { rejectWithValue, dispatch }) {
+	async function ({ id, page, country, order, type }, { rejectWithValue, dispatch }) {
 		try {
-			const data = filmsServices.getFilms(id, page);
+			console.log("GETFILMINSLICE", type);
+			const data = filmsServices.getFilms({ id, page, country, order, type });
 			return data;
 		} catch (error) {
 			console.log(error);
