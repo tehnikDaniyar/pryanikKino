@@ -17,6 +17,7 @@ function App() {
 				{ path: '/films/:id', element: <Films></Films> },
 				{ path: '/films/collections/:collection', element: <Films></Films> },
 				{ path: '/kino/:id', element: <Kino></Kino> },
+				{ path: '/search_results/:searchQuery', element: <Films></Films> },
 				{ path: '*', element: <ErrorPage></ErrorPage> }
 			],
 			errorElement: <ErrorPage></ErrorPage>

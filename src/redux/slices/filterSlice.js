@@ -5,8 +5,8 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
 	country: '',
 	genre: '',
-	order: '',
-	type: ''
+	order: 'RATING',
+	type: 'FILM'
 };
 
 

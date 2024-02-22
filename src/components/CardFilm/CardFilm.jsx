@@ -37,7 +37,7 @@ export default function CardFilm({ item }) {
 	return (
 
 
-		<Link to={`/kino/${item.kinopoiskId}`}>
+		<Link to={`/kino/${item.kinopoiskId || item.filmId}`}>
 			<article className={styles.wrapper}>
 
 				<div className={styles.ratings}>

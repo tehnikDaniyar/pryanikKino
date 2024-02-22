@@ -4,9 +4,11 @@ import { Switch } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { setThemeMode } from "../../redux/slices/statesSlice";
 import { Link } from "react-router-dom";
+import Search from "../Search/Search"
+import { setSearchQuery } from "../../redux/slices/statesSlice";
 
 export default function Header() {
-	const themeMode = useSelector(store => store.states.themeMode)
+	const { themeMode, searchQuery } = useSelector(store => store.states);
 
 
 	const [checked, setChecked] = useState(themeMode == 'dark' ? true : false);
@@ -22,9 +24,9 @@ export default function Header() {
 		}
 	};
 
-
-
-
+	function handlerSearch(e) {
+		dispatch(setSearchQuery(e.target.value))
+	};
 
 
 	return (
@@ -32,6 +34,14 @@ export default function Header() {
 			<div className={styles.logo}>
 				<Link to='/' className={styles.link}>PryanikKino</Link>
 			</div>
+
+			<div className={styles.search}>
+				<Search
+					state={searchQuery}
+					handler={handlerSearch}
+				/>
+			</div>
+
 			<div className={styles.switchTheme}>
 				<span>Ночная тема</span>
 				<Switch

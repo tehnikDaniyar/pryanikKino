@@ -10,7 +10,8 @@ const initialState = {
 	coverInfo: {
 		isCover: false,
 		coverUrl: ''
-	}
+	},
+	searchQuery: ''
 }
 
 
@@ -27,8 +28,11 @@ export const statesSlice = createSlice({
 		},
 		setCoverInfo: (state, action) => {
 			state.coverInfo = { ...action.payload }
-		}
+		},
+		setSearchQuery: (state, action) => {
+			state.searchQuery = action.payload
+		},
 	},
 })
-export const { setThemeMode, setCurentCategoryFilms, setCoverInfo } = statesSlice.actions
+export const { setThemeMode, setCurentCategoryFilms, setCoverInfo, setSearchQuery } = statesSlice.actions
 export default statesSlice.reducer

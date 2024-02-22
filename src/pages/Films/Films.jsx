@@ -10,6 +10,7 @@ import { Pagination } from "@mui/material";
 import { getCollection } from "../../redux/slices/filmsInfoSlice";
 import { setOrder, setCountries, setType } from "../../redux/slices/filterSlice";
 import Filter from "../../components/Filter/Filter";
+import { getSearchedFilms } from "../../redux/slices/filmsInfoSlice";
 
 
 export default function Films() {
@@ -17,12 +18,15 @@ export default function Films() {
 
 	const paramId = useParams().id;
 	const collectionName = useParams().collection;
+	const searchQuery = useParams().searchQuery;
+
+
 	const dispatch = useDispatch();
 	const films = useSelector(store => store.filmsInfo.films);
 	const categories = useSelector(store => store.filmsInfo.categories)
 	const catIsLoading = useSelector(store => store.filmsInfo.catIsLoading);
 	const currentPage = useSelector(store => store.filmsInfo.currentPage);
-	const totalPages = useSelector(store => store.filmsInfo.totalPages);
+	const { totalPages, countries } = useSelector(store => store.filmsInfo);
 	const { country, order, type } = useSelector(store => store.filter);
 
 
@@ -37,13 +41,18 @@ export default function Films() {
 
 	useEffect(() => {
 		if (paramId) {
+			console.log("getfilmsREsult");
 			dispatch(getFilms({ id: paramId, page: currentPage, country: country, order: order, type: type, }))
 		} else if (collectionName) {
+			console.log("collectionREsults");
 			dispatch(getCollection({ page: currentPage, collectionName: collectionName }))
+		} else if (searchQuery) {
+			console.log('searchResults');
+			dispatch(getSearchedFilms({ page: currentPage, query: searchQuery }))
 		}
 
 
-	}, [paramId, currentPage, order, type, country]);
+	}, [paramId, currentPage, order, type, country, searchQuery]);
 
 
 	const handleChange = (e, v) => {
@@ -59,7 +68,7 @@ export default function Films() {
 
 				<Filter
 					handlers={{ setCountries, setOrder, setType }}
-					states={{ country, order, type }}
+					states={{ country, order, type, countries }}
 				/>
 			}
 
@@ -85,6 +94,17 @@ export default function Films() {
 						: <h2>Ожидание загрузки</h2>
 				}
 			</div>
+
+			<Pagination
+				count={totalPages}
+				size="large"
+				className={styles.pagination}
+				page={currentPage}
+				onChange={handleChange}
+				variant="outlined"
+				shape="rounded"
+				color="primary"
+			></Pagination>
 
 		</>
 

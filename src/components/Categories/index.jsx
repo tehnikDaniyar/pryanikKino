@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setCurentCategoryFilms } from '../../redux/slices/statesSlice';
 import { setCurrentPage } from '../../redux/slices/filmsInfoSlice';
+import { setCountries } from '../../redux/slices/filterSlice';
 
 
 export default function Categories() {
@@ -40,6 +41,7 @@ export default function Categories() {
 									onClick={() => {
 										dispatch(setCurentCategoryFilms({ id: cat.id, genre: cat.genre }));
 										dispatch(setCurrentPage(1));
+										dispatch(setCountries(''));
 									}}
 									className={styles.link}
 								>

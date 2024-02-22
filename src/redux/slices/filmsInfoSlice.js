@@ -7,7 +7,7 @@ export const getFilmsCategories = createAsyncThunk(
 	async function (_, { rejectWithValue, dispatch }) {
 		try {
 			const data = await filmsServices.getCategoryes();
-			return data.genres
+			return data
 		} catch (error) {
 			console.log(error);
 			return []
@@ -42,8 +42,6 @@ export const getCollection = createAsyncThunk(
 		}
 	}
 )
-
-
 
 export const getTop200Films = createAsyncThunk(
 	'filmsInfo/getTop200Films',
@@ -85,6 +83,21 @@ export const getKino = createAsyncThunk(
 	}
 )
 
+export const getSearchedFilms = createAsyncThunk(
+	'filmsInfo/getSearchedFilms',
+	async function ({ query, page }, { rejectWithValue, dispatch }) {
+		try {
+			console.log("GETSEARCHEDFILMS", query, page);
+			const data = await filmsServices.getSearchedFilms({ query: query, page: page });
+			console.log(data);
+			return data;
+		} catch (error) {
+			console.log(error);
+			return {}
+		}
+	}
+)
+
 
 
 const initialState = {
@@ -99,7 +112,8 @@ const initialState = {
 	films: [],
 	currentPage: 1,
 	kinoInfo: {},
-	kinoIsLoading: false
+	kinoIsLoading: false,
+	countries: []
 }
 
 export const filmsInfoSlice = createSlice({
@@ -121,7 +135,8 @@ export const filmsInfoSlice = createSlice({
 		builder
 			.addCase(
 				getFilmsCategories.fulfilled, (state, actions) => {
-					state.categories = actions.payload;
+					state.categories = actions.payload.genres;
+					state.countries = actions.payload.countries;
 				}
 			)
 			.addCase(
@@ -141,7 +156,6 @@ export const filmsInfoSlice = createSlice({
 				}
 			)
 
-
 			.addCase(
 				getCollection.fulfilled, (state, actions) => {
 
@@ -151,8 +165,6 @@ export const filmsInfoSlice = createSlice({
 					state.totalPages = actions.payload.data.totalPages; // for pagination
 				}
 			)
-
-
 
 			.addCase(
 				getFilms.fulfilled, (state, actions) => {
@@ -169,6 +181,12 @@ export const filmsInfoSlice = createSlice({
 				}
 			)
 
+			.addCase(
+				getSearchedFilms.fulfilled, (state, actions) => {
+					state.films = [...actions.payload.films];
+					state.totalPages = actions.payload.pagesCount;
+				}
+			)
 	}
 })
 export const { setFilmsCategories, copyCollectionInFilms, setCurrentPage } = filmsInfoSlice.actions
