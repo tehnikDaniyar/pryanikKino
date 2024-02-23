@@ -19,9 +19,10 @@ export default function Categories() {
 
 	const [isOpen, setisOpen] = useState(false);
 	const categories = useSelector(store => store.filmsInfo.categories);
+	const isShowSearch = useSelector(store => store.states.isShowSearch);
 
 	return (
-		<>
+		<div style={{ display: `${isShowSearch ? 'none' : 'block'}` }}>
 			<div
 				className={`${styles.wrapper} ${isOpen ? `${styles.open}` : ''}`}
 				onClick={() => setisOpen(!isOpen)}
@@ -33,22 +34,24 @@ export default function Categories() {
 			>
 				<div className={styles.links}>
 					{
-						categories.length && categories.map(cat => {
-							return (
-								<Link
-									key={cat.id}
-									to={`/films/${cat.id}`}
-									onClick={() => {
-										dispatch(setCurentCategoryFilms({ id: cat.id, genre: cat.genre }));
-										dispatch(setCurrentPage(1));
-										dispatch(setCountries(''));
-									}}
-									className={styles.link}
-								>
-									{cat.genre}
-								</Link>
-							)
-						})
+						categories
+							? categories.length && categories.map(cat => {
+								return (
+									<Link
+										key={cat.id}
+										to={`/films/${cat.id}`}
+										onClick={() => {
+											dispatch(setCurentCategoryFilms({ id: cat.id, genre: cat.genre }));
+											dispatch(setCurrentPage(1));
+											dispatch(setCountries(''));
+										}}
+										className={styles.link}
+									>
+										{cat.genre}
+									</Link>
+								)
+							})
+							: "error"
 					}
 				</div>
 				<div className={styles.icon} >
@@ -56,6 +59,6 @@ export default function Categories() {
 				</div>
 				<h3 className={styles.title}>Категории</h3>
 			</aside>
-		</>
+		</div>
 	)
 }

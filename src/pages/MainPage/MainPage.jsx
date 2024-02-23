@@ -7,11 +7,33 @@ import { useEffect } from "react"
 import { getTop200Films, getTopFilms } from "../../redux/slices/filmsInfoSlice.js"
 import { getCollection } from "../../redux/slices/filmsInfoSlice.js"
 import { setCurrentPage } from "../../redux/slices/filmsInfoSlice.js"
+import { setIsOnline } from "../../redux/slices/statesSlice.js"
 
 
 export default function MainPage() {
 	console.log("MAINPAGE");
-	window.scrollTo(0, 0)
+	const dispatch = useDispatch();
+	window.scrollTo(0, 0);
+	// window.addEventListener('click', (e) => {
+	// 	console.log(e.target);
+	// })
+	// window.addEventListener('offline', () => {
+	// 	oflineHandler();
+	// });
+
+	// window.addEventListener('online', () => {
+	// 	dispatch(setIsOnline(true));
+	// 	window.removeEventListener('popstate', () => { oflineHandler() })
+	// })
+
+
+	// function oflineHandler() {
+	// 	window.addEventListener('popstate', () => {
+	// 		console.log('OFLINEHANDLER');
+	// 		dispatch(setIsOnline(false));
+	// 	})
+	// }
+
 
 	const { isCover, coverUrl } = useSelector(store => store.states.coverInfo)
 	const themeMode = useSelector(store => store.states.themeMode)
@@ -21,7 +43,7 @@ export default function MainPage() {
 		<div
 			className={`${styles.mainpage} ${themeMode === 'dark' ? `${styles.dark}` : `${styles.day}`}`}
 			style={
-				isCover && coverUrl.length > 0
+				isCover
 					? { backgroundImage: `url(${coverUrl})`, backgroundPosition: 'top', backgroundRepeat: "repeat", objectPosition: 'fill' }
 					: { backgroundImage: `none` }
 			}

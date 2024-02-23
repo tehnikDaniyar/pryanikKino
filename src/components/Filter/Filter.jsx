@@ -74,7 +74,7 @@ export default function Filter(props) {
 							{
 								countries.map(country => {
 
-									return <MenuItem value={country.id}>{country.country}</MenuItem>
+									return <MenuItem key={country.id} value={country.id}>{country.country}</MenuItem>
 								})
 							}
 						</Select>

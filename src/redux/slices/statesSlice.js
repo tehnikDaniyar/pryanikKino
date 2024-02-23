@@ -11,7 +11,9 @@ const initialState = {
 		isCover: false,
 		coverUrl: ''
 	},
-	searchQuery: ''
+	searchQuery: '',
+	isOnline: true,
+	isShowSearch: false,
 }
 
 
@@ -32,7 +34,14 @@ export const statesSlice = createSlice({
 		setSearchQuery: (state, action) => {
 			state.searchQuery = action.payload
 		},
+		setIsOnline: (state, action) => {
+			state.isOnline = action.payload
+		},
+		setIsShowSearch: (state, action) => {
+			console.log('SETISSHOWSEARCH');
+			state.isShowSearch = action.payload
+		},
 	},
 })
-export const { setThemeMode, setCurentCategoryFilms, setCoverInfo, setSearchQuery } = statesSlice.actions
+export const { setThemeMode, setCurentCategoryFilms, setCoverInfo, setSearchQuery, setIsOnline, setIsShowSearch } = statesSlice.actions
 export default statesSlice.reducer
