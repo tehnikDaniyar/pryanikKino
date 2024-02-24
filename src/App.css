@@ -16,3 +16,24 @@ body {
 	width: 100%;
 	height: 100%;
 }
+
+#select-filter-label {
+	color: white;
+	top: -25px;
+	font-size: 20px;
+}
+
+#demo-simple-select {
+	/* background-color: red; */
+	color: white;
+	border: 1px solid white;
+}
+
+#select-filter-label-countries {
+	color: white;
+	top: -10px;
+}
+
+#radio-filter-label {
+	color: white;
+}

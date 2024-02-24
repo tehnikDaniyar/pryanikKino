@@ -4,7 +4,6 @@ import { FormControl, Select, MenuItem, InputLabel, Radio, RadioGroup, FormContr
 import { useDispatch } from "react-redux";
 
 
-
 export default function Filter(props) {
 	const dispatch = useDispatch();
 	console.log(props);
@@ -26,12 +25,14 @@ export default function Filter(props) {
 		dispatch(setCountries(e.target.value))
 	}
 
+
+
 	return (
 		<>
 			<div className={styles.wrapper}>
 				<div className={styles.order}>
 					<FormControl fullWidth>
-						<InputLabel id="demo-simple-select-label">Сортировка по</InputLabel>
+						<InputLabel id="select-filter-label">Сортировка по</InputLabel>
 						<Select
 							labelId="demo-simple-select-label"
 							id="demo-simple-select"
@@ -48,7 +49,7 @@ export default function Filter(props) {
 
 				<div className={styles.type}>
 					<FormControl>
-						<FormLabel id="demo-radio-buttons-group-label">Что будем смотреть?</FormLabel>
+						<FormLabel id="radio-filter-label">Что будем смотреть?</FormLabel>
 						<RadioGroup
 							aria-labelledby="demo-radio-buttons-group-label"
 							defaultValue="FILM"
@@ -63,18 +64,18 @@ export default function Filter(props) {
 
 				<div className={styles.countries}>
 					<FormControl fullWidth>
-						<InputLabel id="demo-simple-select-label">Выбрать страну</InputLabel>
+						<InputLabel id="select-filter-label-countries">Выбрать страну</InputLabel>
 						<Select
 							labelId="demo-simple-select-label"
 							id="demo-simple-select"
 							value={country}
-							label="фильмы\сериалы"
 							onChange={handleCountry}
+							style={{ color: 'white' }}
 						>
 							{
 								countries.map(country => {
 
-									return <MenuItem key={country.id} value={country.id}>{country.country}</MenuItem>
+									return <MenuItem key={country.id} value={country.id} >{country.country}</MenuItem>
 								})
 							}
 						</Select>
@@ -82,7 +83,7 @@ export default function Filter(props) {
 				</div>
 
 
-			</div>
+			</div >
 
 		</>
 	)
