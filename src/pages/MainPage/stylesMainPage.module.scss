@@ -8,6 +8,10 @@
 	position: relative;
 	// border: 7px solid red;
 
+	@media (max-width:767px) {
+		padding-top: 80px;
+	}
+
 	&.dark {
 		background-color: rgb(48, 43, 43);
 		color: white;

@@ -11,6 +11,10 @@
 		background-color: rgba(0, 0, 0, 0.418);
 		z-index: 19;
 	}
+
+	@media (max-width:767px) {
+		display: none;
+	}
 }
 
 .categories {
@@ -27,6 +31,15 @@
 	padding: 20px;
 	height: 80vh;
 
+	@media (max-width:767px) {
+		width: 100vw;
+		transform: translateX(0%);
+		height: 130px;
+		background-color: #361a1a00;
+		position: static;
+		margin-bottom: 30px;
+	}
+
 	.title {
 		position: absolute;
 		top: 0;
@@ -35,6 +48,10 @@
 		padding: 2px;
 		background-color: #917070;
 		font-size: 20px;
+
+		@media (max-width:767px) {
+			display: none;
+		}
 	}
 
 	&.open {
@@ -64,10 +81,29 @@
 			background-color: #361a1a;
 		}
 
+		@media (max-width:767px) {
+			flex-direction: row;
+			overflow-y: hidden;
+			overflow-x: scroll;
+			gap: 20px;
+		}
+
 		.link {
 			text-decoration: none;
 			font-size: 18px;
 			color: inherit;
+
+			@media (max-width:767px) {
+				flex: 0 0 150px;
+				align-self: center;
+				justify-self: center;
+				text-align: center;
+				border: 1px solid white;
+				padding: 10px;
+				border-radius: 50px;
+			}
+
+
 
 			&:hover {
 				color: red;
@@ -83,6 +119,10 @@
 		top: 50%;
 		transition: all 0.8s linear;
 		transform: rotate(180deg);
+
+		@media (max-width:767px) {
+			display: none;
+		}
 	}
 
 	&.open .icon {

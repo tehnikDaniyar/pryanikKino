@@ -22,13 +22,17 @@ export default function Slider({ slides, title, collectionKey }) {
 				key={slideInfo.kinopoiskId}
 				className={styles.swiperSlide}
 			>
-				<img className={`${styles.image} _ibg`}
-					key={slideInfo.kinopoiskId}
-					src={slideInfo.posterUrlPreview}
-					alt="slide image"
-					onClick={() => console.log(slideInfo.kinopoiskId)}
-				/>
-				<RatinInd rating={slideInfo.ratingKinopoisk} width='70%'></RatinInd>
+
+				<Link to={`kino/${slideInfo.kinopoiskId}`}>
+					<img className={`${styles.image} _ibg`}
+						key={slideInfo.kinopoiskId}
+						src={slideInfo.posterUrlPreview}
+						alt="slide image"
+						onClick={() => console.log(slideInfo.kinopoiskId)}
+					/>
+					<RatinInd rating={slideInfo.ratingKinopoisk} width='70%'></RatinInd>
+
+				</Link>
 			</SwiperSlide>
 		)
 	})
