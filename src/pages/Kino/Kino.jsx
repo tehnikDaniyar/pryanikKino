@@ -11,13 +11,43 @@ import { xFrameBypass, customElementBuiltin } from "../../scripts/xFrameBypass";
 
 export default function Kino() {
 
-	window.scrollTo(0, 0)
+	window.scrollTo(0, 0);
+
+	const [isMobile, setIsMobile] = useState(false);
+	const { innerWidth: width, innerHeight: height } = window;
+
+	function checkViewport() {
+		if (innerWidth < 375) {
+
+			if (isMobile == false) {
+				console.log('<375!!!!!!!');
+				setIsMobile(true);
+			}
+		};
+
+		if (innerWidth > 375) {
+			console.log('ISMOBILE', isMobile);
+			if (isMobile == true) {
+				console.log('>375!!!!!!!');
+				setIsMobile(false);
+			}
+		}
+
+	};
+
+	useEffect(() => {
+		console.log('USEEFFECT!!!!!!');
+		checkViewport();
+	}, [innerWidth])
+
 
 	const filmId = useParams().id;
 	const dispatch = useDispatch();
 	const { kinoInfo, kinoIsLoading } = useSelector(store => store.filmsInfo);
 
 	console.log("KINO", kinoInfo, kinoIsLoading);
+
+
 
 	// const kino = JSON.stringify({
 	// 	"kinopoiskId": 301,
@@ -203,14 +233,26 @@ export default function Kino() {
 							<div>
 								<span>Imbd</span>
 								<div>
-									<Rating name="customized-10" defaultValue={kinoInfo.ratingImdb} max={10} readOnly precision={0.1} size="large" />
+									<Rating
+										name="customized-10"
+										defaultValue={kinoInfo.ratingImdb}
+										max={10} readOnly precision={0.1}
+										size={`${isMobile ? 'small' : 'large'}`}
+									/>
 								</div>
 							</div>
 
 							<div>
 								<span>Kinopoisk</span>
 								<div>
-									<Rating name="customized-10" defaultValue={kinoInfo.ratingKinopoisk} max={10} readOnly precision={0.1} size="large" />
+									<Rating
+										name="customized-10"
+										defaultValue={kinoInfo.ratingKinopoisk}
+										max={10}
+										readOnly
+										precision={0.1}
+										size={`${isMobile ? 'small' : 'large'}`}
+									/>
 								</div>
 							</div>
 						</div>

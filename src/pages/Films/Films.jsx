@@ -90,7 +90,7 @@ export default function Films() {
 			<div className={styles.wrapper}>
 				{
 					Boolean(films.length)
-						? films.map(item => <CardFilm key={item.kinopoiskId} item={item} ></CardFilm>)
+						? films.map(item => <CardFilm key={item.kinopoiskId || item.filmId} item={item} ></CardFilm>)
 						: <h2>Ожидание загрузки</h2>
 				}
 			</div>
