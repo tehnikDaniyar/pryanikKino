@@ -13,34 +13,7 @@ export default function Kino() {
 
 	window.scrollTo(0, 0);
 
-	const [isMobile, setIsMobile] = useState(false);
-	const { innerWidth: width, innerHeight: height } = window;
-
-	function checkViewport() {
-		if (innerWidth < 375) {
-
-			if (isMobile == false) {
-				console.log('<375!!!!!!!');
-				setIsMobile(true);
-			}
-		};
-
-		if (innerWidth > 375) {
-			console.log('ISMOBILE', isMobile);
-			if (isMobile == true) {
-				console.log('>375!!!!!!!');
-				setIsMobile(false);
-			}
-		}
-
-	};
-
-	useEffect(() => {
-		console.log('USEEFFECT!!!!!!');
-		checkViewport();
-	}, [innerWidth])
-
-
+	const isMobile = useSelector(store => store.states.isMobile);
 	const filmId = useParams().id;
 	const dispatch = useDispatch();
 	const { kinoInfo, kinoIsLoading } = useSelector(store => store.filmsInfo);

@@ -14,6 +14,7 @@ const initialState = {
 	searchQuery: '',
 	isOnline: true,
 	isShowSearch: false,
+	isMobile: false,
 }
 
 
@@ -41,7 +42,11 @@ export const statesSlice = createSlice({
 			console.log('SETISSHOWSEARCH');
 			state.isShowSearch = action.payload
 		},
+		setIsMobile: (state, action) => {
+			state.isMobile = action.payload
+		},
+
 	},
 })
-export const { setThemeMode, setCurentCategoryFilms, setCoverInfo, setSearchQuery, setIsOnline, setIsShowSearch } = statesSlice.actions
+export const { setThemeMode, setCurentCategoryFilms, setCoverInfo, setSearchQuery, setIsOnline, setIsShowSearch, setIsMobile } = statesSlice.actions
 export default statesSlice.reducer

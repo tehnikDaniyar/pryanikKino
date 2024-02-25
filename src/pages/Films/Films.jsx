@@ -19,7 +19,7 @@ export default function Films() {
 	const paramId = useParams().id;
 	const collectionName = useParams().collection;
 	const searchQuery = useParams().searchQuery;
-
+	const isMobile = useSelector(store => store.states.isMobile);
 
 	const dispatch = useDispatch();
 	const films = useSelector(store => store.filmsInfo.films);
@@ -75,7 +75,7 @@ export default function Films() {
 			<div className={styles.paginatioin_wrapper}>
 				<Pagination
 					count={totalPages}
-					size="large"
+					size={`${isMobile ? 'small' : 'large'}`}
 					className={styles.pagination}
 					page={currentPage}
 					onChange={handleChange}
@@ -101,7 +101,7 @@ export default function Films() {
 			<div className={styles.paginatioin_wrapper}>
 				<Pagination
 					count={totalPages}
-					size="large"
+					size={`${isMobile ? 'small' : 'large'}`}
 					className={styles.pagination}
 					page={currentPage}
 					onChange={handleChange}

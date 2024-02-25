@@ -9,13 +9,22 @@ import { getTop200Films, getTopFilms } from "../../redux/slices/filmsInfoSlice.j
 import { getCollection } from "../../redux/slices/filmsInfoSlice.js"
 import { setCurrentPage } from "../../redux/slices/filmsInfoSlice.js"
 import { setIsOnline } from "../../redux/slices/statesSlice.js"
+import { checkViewport } from "../../scripts/checkViewport.js"
+import { setIsMobile } from "../../redux/slices/statesSlice.js"
 
 
 export default function MainPage() {
 	console.log("MAINPAGE");
 	const dispatch = useDispatch();
 	window.scrollTo(0, 0);
+	const isMobile = useSelector(store => store.states.isMobile);
+
 	LANcontroll(setIsOnline, dispatch);
+
+	useEffect(() => {
+		checkViewport({ state: isMobile, set: setIsMobile, dispatch: dispatch, widthVW: 500 })
+	}, [])
+
 
 	const { isCover, coverUrl } = useSelector(store => store.states.coverInfo)
 	const themeMode = useSelector(store => store.states.themeMode)
