@@ -1,4 +1,4 @@
-import react, { useEffect } from "react";
+import react, { useEffect, useState } from "react";
 import styles from './stylesFilter.module.scss'
 import { FormControl, Select, MenuItem, InputLabel, Radio, RadioGroup, FormControlLabel, FormLabel } from "@mui/material";
 import { useDispatch } from "react-redux";
@@ -8,6 +8,7 @@ export default function Filter(props) {
 	const dispatch = useDispatch();
 	console.log(props);
 
+	const [isOpen, setIsOpen] = useState(false);
 	const { setCountries, setOrder, setType } = props.handlers;
 	const { country, order, type, countries } = props.states;
 	console.log(countries);
@@ -25,11 +26,13 @@ export default function Filter(props) {
 		dispatch(setCountries(e.target.value))
 	}
 
-
-
 	return (
 		<>
-			<div className={styles.wrapper}>
+			<div className={styles.title} onClick={() => setIsOpen(!isOpen)}>
+				<span className={`${styles.burger} ${isOpen ? styles.open : ''}`}><span></span></span>
+				<h3>Отфильтровать результаты</h3>
+			</div>
+			<div className={`${styles.wrapper} ${isOpen ? styles.open : ''}`}>
 				<div className={styles.order}>
 					<FormControl fullWidth>
 						<InputLabel id="select-filter-label">Сортировка по</InputLabel>
@@ -81,7 +84,6 @@ export default function Filter(props) {
 						</Select>
 					</FormControl>
 				</div>
-
 
 			</div >
 

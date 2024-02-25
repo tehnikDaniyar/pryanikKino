@@ -1,5 +1,5 @@
 export const LANcontroll = (set, dispatch) => {
-	window.addEventListener('offline', oflineHandler)
+	window.addEventListener('offline', oflineHandler);
 
 	window.addEventListener('online', () => {
 		dispatch(set(true));
@@ -15,7 +15,6 @@ export const LANcontroll = (set, dispatch) => {
 		if (target.tagName === 'A') {
 			console.log(target.tagName);
 			dispatch(set(false))
-
 		};
 	};
 }
