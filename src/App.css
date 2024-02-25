@@ -37,3 +37,17 @@ body {
 #radio-filter-label {
 	color: white;
 }
+
+#pagination-films {
+
+
+	button {
+		color: white;
+		border: 1px solid white;
+	}
+
+	ul {
+		gap: 10px;
+	}
+
+}

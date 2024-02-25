@@ -3,6 +3,10 @@
 	grid-template: auto / repeat(3, 1fr);
 	gap: 30px;
 
+	@media (max-width:767px) {
+		grid-template: repeat(3, auto) / auto;
+	}
+
 	margin-bottom: 40px;
 
 	.type {

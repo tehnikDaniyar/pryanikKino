@@ -72,18 +72,21 @@ export default function Films() {
 				/>
 			}
 
+			<div className={styles.paginatioin_wrapper}>
+				<Pagination
+					count={totalPages}
+					size="large"
+					className={styles.pagination}
+					page={currentPage}
+					onChange={handleChange}
+					variant="outlined"
+					shape="rounded"
+					color="secondary"
+					id="pagination-films"
+				></Pagination>
+			</div>
 
 
-			<Pagination
-				count={totalPages}
-				size="large"
-				className={styles.pagination}
-				page={currentPage}
-				onChange={handleChange}
-				variant="outlined"
-				shape="rounded"
-				color="primary"
-			></Pagination>
 
 
 
@@ -95,16 +98,19 @@ export default function Films() {
 				}
 			</div>
 
-			<Pagination
-				count={totalPages}
-				size="large"
-				className={styles.pagination}
-				page={currentPage}
-				onChange={handleChange}
-				variant="outlined"
-				shape="rounded"
-				color="primary"
-			></Pagination>
+			<div className={styles.paginatioin_wrapper}>
+				<Pagination
+					count={totalPages}
+					size="large"
+					className={styles.pagination}
+					page={currentPage}
+					onChange={handleChange}
+					variant="outlined"
+					shape="rounded"
+					color="secondary"
+					id="pagination-films"
+				></Pagination>
+			</div>
 
 		</>
 
