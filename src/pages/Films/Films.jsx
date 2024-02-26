@@ -20,7 +20,6 @@ export default function Films() {
 	const collectionName = useParams().collection;
 	const searchQuery = useParams().searchQuery;
 	const isMobile = useSelector(store => store.states.isMobile);
-
 	const dispatch = useDispatch();
 	const films = useSelector(store => store.filmsInfo.films);
 	const categories = useSelector(store => store.filmsInfo.categories)
@@ -28,7 +27,6 @@ export default function Films() {
 	const currentPage = useSelector(store => store.filmsInfo.currentPage);
 	const { totalPages, countries } = useSelector(store => store.filmsInfo);
 	const { country, order, type } = useSelector(store => store.filter);
-
 
 
 	const titleName = () => {
@@ -41,13 +39,10 @@ export default function Films() {
 
 	useEffect(() => {
 		if (paramId) {
-			console.log("getfilmsREsult");
 			dispatch(getFilms({ id: paramId, page: currentPage, country: country, order: order, type: type, }))
 		} else if (collectionName) {
-			console.log("collectionREsults");
 			dispatch(getCollection({ page: currentPage, collectionName: collectionName }))
 		} else if (searchQuery) {
-			console.log('searchResults');
 			dispatch(getSearchedFilms({ page: currentPage, query: searchQuery }))
 		}
 

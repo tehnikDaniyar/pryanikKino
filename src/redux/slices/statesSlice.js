@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-
 const initialState = {
 	themeMode: localStorage.getItem('themeMode') || 'light',
 	curentCategoryFilms: {
@@ -15,6 +14,7 @@ const initialState = {
 	isOnline: true,
 	isShowSearch: false,
 	isMobile: false,
+	reload: false,
 }
 
 
@@ -33,6 +33,7 @@ export const statesSlice = createSlice({
 			state.coverInfo = { ...action.payload }
 		},
 		setSearchQuery: (state, action) => {
+			console.log("SETSEARCHQUERY");
 			state.searchQuery = action.payload
 		},
 		setIsOnline: (state, action) => {
@@ -45,8 +46,10 @@ export const statesSlice = createSlice({
 		setIsMobile: (state, action) => {
 			state.isMobile = action.payload
 		},
-
+		switchReload: (state, action) => {
+			state.reload = action.payload
+		}
 	},
 })
-export const { setThemeMode, setCurentCategoryFilms, setCoverInfo, setSearchQuery, setIsOnline, setIsShowSearch, setIsMobile } = statesSlice.actions
+export const { setThemeMode, setCurentCategoryFilms, setCoverInfo, setSearchQuery, setIsOnline, setIsShowSearch, setIsMobile, switchReload } = statesSlice.actions
 export default statesSlice.reducer

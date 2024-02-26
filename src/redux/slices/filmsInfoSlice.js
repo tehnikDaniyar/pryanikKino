@@ -128,7 +128,7 @@ export const filmsInfoSlice = createSlice({
 		},
 		setCurrentPage: (state, action) => {
 			state.currentPage = action.payload;
-		}
+		},
 	},
 
 	extraReducers: (builder) => {
