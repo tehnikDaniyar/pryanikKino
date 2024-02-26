@@ -16,8 +16,9 @@ import { setIsMobile } from "../../redux/slices/statesSlice.js"
 export default function MainPage() {
 	console.log("MAINPAGE");
 	const dispatch = useDispatch();
-	window.scrollTo(0, 0);
-	const isMobile = useSelector(store => store.states.isMobile);
+	// window.scrollTo(0, 0);
+	const { isMobile, isShowSearch } = useSelector(store => store.states);
+	console.log(isShowSearch);
 
 	LANcontroll(setIsOnline, dispatch);
 
@@ -34,16 +35,24 @@ export default function MainPage() {
 			className={`${styles.mainpage} ${themeMode === 'dark' ? `${styles.dark}` : `${styles.day}`}`}
 			style={
 				isCover
-					? { backgroundImage: `url(${coverUrl})`, backgroundPosition: 'top', backgroundRepeat: "repeat", objectPosition: 'fill' }
+					? {
+						backgroundImage: `url(${coverUrl})`,
+						backgroundPosition: 'top',
+						backgroundRepeat: "repeat",
+						objectPosition: 'fill',
+
+					}
 					: { backgroundImage: `none` }
 			}
 		>
 			<Header></Header>
 			<Categories></Categories>
-			<div className={styles.content}>
+			<div className={styles.content}
+
+			>
 				<Outlet></Outlet>
 			</div>
 
-		</div>
+		</div >
 	)
 }

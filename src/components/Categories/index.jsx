@@ -19,10 +19,10 @@ export default function Categories() {
 
 	const [isOpen, setisOpen] = useState(false);
 	const categories = useSelector(store => store.filmsInfo.categories);
-	const isShowSearch = useSelector(store => store.states.isShowSearch);
+	const isShowCategories = useSelector(store => store.states.isShowCategories);
 
 	return (
-		<div style={{ display: `${isShowSearch ? 'none' : 'block'}` }}>
+		<div style={{ display: `${isShowCategories ? 'none' : 'block'}` }}>
 			<div
 				className={`${styles.wrapper} ${isOpen ? `${styles.open}` : ''}`}
 				onClick={() => setisOpen(!isOpen)}

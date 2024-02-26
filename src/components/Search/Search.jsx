@@ -3,8 +3,7 @@ import styles from './stylesSearch.module.scss'
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setIsShowSearch } from "../../redux/slices/statesSlice";
-import { switchReload } from "../../redux/slices/statesSlice";
-
+import searchIcon from '../../assets/img/search.svg'
 
 export default function Search({ state, handler }) {
 	const dispatch = useDispatch();
@@ -20,7 +19,7 @@ export default function Search({ state, handler }) {
 	return (
 		<>
 			<div
-				className={`${styles.wrapper} ${isShow ? styles.show : ""}`}
+				className={`${styles.wrapper} ${isShow ? styles.show : ""} `}
 				onClick={() => dispatch(setIsShowSearch(false))}
 			>
 				<input
@@ -30,11 +29,14 @@ export default function Search({ state, handler }) {
 					className={styles.input}
 					onClick={(e) => e.stopPropagation()}
 					onKeyDown={(e) => keyDownHandler(e)}
+					placeholder="Поиск"
 				/>
 				<div className={styles.searchIcon}>
 					{
 						state &&
-						<Link to={`/search_results/${state}`}>searchIcon</Link>
+						<Link to={`/search_results/${state}`}>
+							<img src={searchIcon} alt="search" />
+						</Link>
 					}
 				</div>
 			</div>
@@ -43,9 +45,14 @@ export default function Search({ state, handler }) {
 				className={styles.searchMobileIcon}
 				onClick={() => dispatch(setIsShowSearch(true))}
 			>
-				SEARCH
+				<img src={searchIcon} alt="search" />
 			</div>
 
+			<div
+				className={`${styles.background} ${isShow ? `${styles.show}` : ''}`}
+				onClick={() => dispatch(setIsShowSearch(false))}
+			>
+			</div>
 		</>
 
 
