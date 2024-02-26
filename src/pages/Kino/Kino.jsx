@@ -98,8 +98,8 @@ export default function Kino() {
 	}, [filmId, kinoIsLoading])
 
 	useEffect(() => {
-		if (kinoIsLoading, kinoInfo.coverUrl) {
-			dispatch(setCoverInfo({ isCover: true, coverUrl: kinoInfo.coverUrl }))
+		if (kinoIsLoading) {
+			dispatch(setCoverInfo({ isCover: true, coverUrl: kinoInfo.coverUrl || kinoInfo.posterUrl }))
 		}
 
 		return function clearCover() {
@@ -107,7 +107,7 @@ export default function Kino() {
 		}
 
 
-	}, [kinoIsLoading, kinoInfo.coverUrl])
+	}, [kinoIsLoading, kinoInfo.coverUrl, kinoInfo.posterUrl])
 
 	// xFrameBypass();
 	// customElementBuiltin();

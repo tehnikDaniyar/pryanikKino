@@ -48,7 +48,6 @@ export default function MainPage() {
 			<Header></Header>
 			<Categories></Categories>
 			<div className={styles.content}
-
 			>
 				<Outlet></Outlet>
 			</div>
