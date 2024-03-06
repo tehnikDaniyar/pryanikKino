@@ -1,13 +1,21 @@
 .startPage {
-	display: flex;
+	// display: flex;
 
-	.filter {
-		flex: 0 0 50%;
+	// .filter {
+	// 	flex: 0 0 50%;
+	// }
+
+	.slidersWrapper {
+		display: grid;
+		grid-template: auto / 1fr 1fr;
+		gap: 40px;
+
+		.slider {
+			min-width: 0;
+		}
 	}
 
-	.sliders {
-		min-width: 0;
-	}
+
 
 
 }

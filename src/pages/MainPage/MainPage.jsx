@@ -23,7 +23,7 @@ export default function MainPage() {
 	LANcontroll(setIsOnline, dispatch);
 
 	useEffect(() => {
-		checkViewport({ state: isMobile, set: setIsMobile, dispatch: dispatch, widthVW: 500 })
+		checkViewport({ state: isMobile, set: setIsMobile, dispatch: dispatch, widthVW: 550 })
 	}, [])
 
 

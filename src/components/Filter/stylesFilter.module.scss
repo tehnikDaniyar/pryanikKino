@@ -7,10 +7,10 @@
 		grid-template: repeat(3, auto) / auto;
 		position: absolute;
 		left: -200%;
-		top: 200px;
+		top: clamp(8.438rem, 6.424rem + 10.07vw, 11.25rem);
 		width: 80%;
 		background-color: rgb(49, 49, 49);
-		z-index: 9;
+		z-index: 10;
 		padding: 70px 50px 50px;
 		border: 1px solid white;
 		transition: all 0.6s ease;
@@ -34,12 +34,12 @@
 	@media (max-width:767px) {
 		display: block;
 		position: absolute;
-		top: 200px;
-		left: 20px;
+		top: clamp(8.438rem, 6.424rem + 10.07vw, 11.25rem);
+		left: 0px;
 		padding: 8px;
 		border: 1px solid white;
 		background-color: rgb(99, 61, 61);
-		z-index: 10;
+		z-index: 11;
 		display: flex;
 		gap: 10px;
 	}

@@ -109,6 +109,7 @@ const initialState = {
 	top200Films: [],
 	TOP_POPULAR_MOVIES: [],
 	TOP_250_MOVIES: [],
+	FAMILY: [],
 	films: [],
 	currentPage: 1,
 	kinoInfo: {},

@@ -37,7 +37,7 @@
 		height: 130px;
 		// background-color: #361a1a;
 		position: static;
-		margin-bottom: 30px;
+		margin-bottom: 10px;
 		height: clamp(5rem, 2.763rem + 11.19vw, 8.125rem);
 	}
 
@@ -74,7 +74,7 @@
 		height: 100%;
 
 		&::-webkit-scrollbar {
-			width: 20px;
+			width: 10px;
 			background-color: inherit;
 		}
 

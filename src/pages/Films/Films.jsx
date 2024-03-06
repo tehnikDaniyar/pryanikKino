@@ -57,6 +57,7 @@ export default function Films() {
 	return (
 		<>
 			<h1 className={styles.title}>{titleName()} </h1>
+			<h2 className={styles.type}>{type === "FILM" ? 'Фильмы' : "Сериалы"}</h2>
 
 			{
 				paramId &&
@@ -69,6 +70,7 @@ export default function Films() {
 
 			<div className={styles.paginatioin_wrapper}>
 				<Pagination
+					boundaryCount={0}
 					count={totalPages}
 					size={`${isMobile ? 'small' : 'large'}`}
 					className={styles.pagination}

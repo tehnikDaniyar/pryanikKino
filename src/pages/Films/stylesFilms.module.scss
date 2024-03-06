@@ -24,12 +24,26 @@
 
 
 	@media (max-width:767px) {
+		grid-template: auto / repeat(2, 1fr);
+		gap: 5px;
+	}
+
+	@media (max-width:450px) {
 		grid-template: auto / repeat(1, 1fr);
 	}
+
 }
 
 .title {
 	text-align: center;
-	font-size: 32px;
-	margin-bottom: 60px;
+	font-size: clamp(1.25rem, 0.977rem + 1.36vw, 2rem);
+	margin-bottom: clamp(1.875rem, 1.193rem + 3.41vw, 3.75rem);
+}
+
+.type {
+	display: none;
+
+	@media (max-width:767px) {
+		display: block;
+	}
 }

@@ -21,29 +21,35 @@ export default function Start() {
 		)
 	}
 
-	// useEffect(() => {
-	// 	dispatch(getTopFilms());
-	// 	dispatch(getTop200Films());
-	// }, []);
 
 	useEffect(() => {
 		dispatch(getCollection({ page: 1, collectionName: "TOP_POPULAR_MOVIES" }))
 		dispatch(getCollection({ page: 1, collectionName: "TOP_250_MOVIES" }))
+		dispatch(getCollection({ page: 1, collectionName: "FAMILY" }))
 	}, []);
 
 
 	const topFilms = useSelector(store => store.filmsInfo.TOP_POPULAR_MOVIES);
 	const top200Films = useSelector(store => store.filmsInfo.TOP_250_MOVIES);
+	const family = useSelector(store => store.filmsInfo.FAMILY);
+
 
 
 	return (
 		<section className={styles.startPage}>
-			<div className={styles.filter}>
+
+			<div className={styles.slidersWrapper}>
+				<div className={styles.slider}>
+					{getSlider(topFilms, 'топ новинок', "TOP_POPULAR_MOVIES")}
+				</div>
+				<div className={styles.slider}>
+					{getSlider(top200Films, 'топ 200 фильмов', "TOP_250_MOVIES")}
+				</div>
+				<div className={styles.slider}>
+					{getSlider(family, 'Семейное кино', "FAMILY")}
+				</div>
 			</div>
-			<div className={styles.sliders}>
-				{getSlider(topFilms, 'топ новинок', "TOP_POPULAR_MOVIES")}
-				{getSlider(top200Films, 'топ 200 фильмов', "TOP_250_MOVIES")}
-			</div>
+
 		</section>
 	)
 }

@@ -4,6 +4,10 @@
 	padding: 0;
 }
 
+a {
+	text-decoration: none;
+}
+
 body {
 	font-family: 'Roboto';
 	overflow-x: hidden;
@@ -26,6 +30,10 @@ body {
 #demo-simple-select {
 	/* background-color: red; */
 	color: white;
+	border: 1px solid white;
+}
+
+#demo-simple-select:hover {
 	border: 1px solid white;
 }
 
