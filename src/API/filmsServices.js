@@ -65,12 +65,9 @@ export default class filmsServices {
 			params: {
 				keyword: query,
 				page: page,
-				type: "TV_SERIES"
 			}
 		});
 		return await response.data
 	}
-
-
 }
 
