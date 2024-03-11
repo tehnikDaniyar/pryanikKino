@@ -28,7 +28,7 @@ export default class filmsServices {
 
 	//?genres=17&order=RATING&type=FILM&ratingFrom=0&ratingTo=10&yearFrom=1000&yearTo=3000&page=1
 	static async getFilms({ id, page, country, order, type }) {
-		console.log("GETFILMSinSERVICES", type);
+
 		const response = await axios.get(`${baseUrl}`, {
 			headers: headers,
 			params: {
@@ -47,11 +47,8 @@ export default class filmsServices {
 	}
 
 	static async getKinoOfId(id) {
-		const response = await axios.get(`${baseUrl}//${id}`, {
-			headers: headers,
-			// params: {
-			// 	id: id
-			// }
+		const response = await axios.get(`${baseUrl}/${id}`, {
+			headers: headers
 		});
 		return await response.data
 	}
@@ -59,7 +56,6 @@ export default class filmsServices {
 	//  'https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=sea&page=1'
 
 	static async getSearchedFilms({ query, page }) {
-		console.log("GETSEARCHEDFILMSSERVICES", query, page);
 		const response = await axios.get(`https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword`, {
 			headers: headers,
 			params: {

@@ -1,4 +1,3 @@
-import react, { useRef, useState } from "react";
 import styles from './stylesSearch.module.scss'
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";

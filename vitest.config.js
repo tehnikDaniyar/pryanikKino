@@ -4,7 +4,8 @@ import viteConfig from './vite.config';
 
 export default mergeConfig(viteConfig, defineConfig({
 	test: {
-
+		environment: 'jsdom',
+		setupFiles: './tests/setup.js'
 	}
-}))
+}));
 
