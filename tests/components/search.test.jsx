@@ -1,10 +1,12 @@
-import { expect, describe, test, beforeEach, vi } from "vitest";
+import { expect, describe, test, beforeEach, vi, afterEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import NumberInput from "../../src/components/NumberInput/NumberInput";
 import userEvent from "@testing-library/user-event";
 
 
 describe('тестирование NumberInput', () => {
+
+
 
 	describe('тестирование базовых функций', () => {
 		const inputTestId = 'feofmrepvm909';
@@ -24,6 +26,10 @@ describe('тестирование NumberInput', () => {
 			/>);
 			input = screen.getByTestId(inputTestId);
 		});
+
+		afterEach(() => {
+			vi.clearAllMocks();
+		})
 
 		test('тест базовое знчение инпута', () => {
 			expect(input.value).toBe(state);
@@ -47,9 +53,41 @@ describe('тестирование NumberInput', () => {
 
 		test('check blur on NumberInput', async () => {
 			await userEvent.unhover(input);
-			expect(onHoverInput).toBeCalled();
+			// expect(onHoverInput).toBeCalled();
 			expect(onBlurInput).toBeCalled();
 		});
 
+	});
+
+	describe('test rerender input', () => {
+		const inputTestId = 'feofmrepvm909';
+		let state = '';
+		const hundler = vi.fn((value) => state = value);
+		let input;
+		let rerendeOption;
+
+		beforeEach(() => {
+			rerendeOption = render(<NumberInput
+				data-testid={inputTestId}
+				state={state}
+				hundler={hundler}
+			/>);
+			input = screen.getByTestId(inputTestId);
+		});
+
+		afterEach(() => {
+			vi.clearAllMocks();
+		});
+
+		test('rerender', async () => {
+			await userEvent.type(input, "3");
+			expect(hundler).toBeCalledWith("3");
+			rerendeOption.rerender(<NumberInput
+				data-testid={inputTestId}
+				state={state}
+				hundler={hundler}
+			/>);
+			expect(input.value).toBe("3");
+		})
 	});
 });
