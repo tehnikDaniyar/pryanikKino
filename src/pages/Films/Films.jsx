@@ -84,9 +84,6 @@ export default function Films() {
 			</div>
 
 
-
-
-
 			<div className={styles.wrapper}>
 				{
 					Boolean(films.length)

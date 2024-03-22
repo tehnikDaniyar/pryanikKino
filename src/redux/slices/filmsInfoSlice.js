@@ -32,9 +32,7 @@ export const getCollection = createAsyncThunk(
 	'filmsInfo/getCollection',
 	async function ({ page, collectionName }, { rejectWithValue, dispatch }) {
 		try {
-			console.log('GETCOLLECTION!!!!!!1');
 			const data = await filmsServices.getCollections(collectionName, page);
-			// console.log({ collectionName: collectionName, data: data });
 			return { collectionName: collectionName, data: data };
 		} catch (error) {
 			console.log(error);
@@ -100,7 +98,7 @@ export const getSearchedFilms = createAsyncThunk(
 
 
 
-const initialState = {
+export const initialState = {
 	categories: [
 	],
 	catIsLoading: false,
@@ -121,14 +119,12 @@ export const filmsInfoSlice = createSlice({
 	name: 'filmsInfo',
 	initialState,
 	reducers: {
-		setFilmsCategories: (state, action) => {
-			state.sortProperty = action.payload;
-		},
-		copyCollectionInFilms: (state, action) => {
-			state.films = state[action.payload]
-		},
 		setCurrentPage: (state, action) => {
-			state.currentPage = action.payload;
+			if (Number.isInteger(action.payload)) {
+				state.currentPage = action.payload;
+			} else {
+				state.currentPage = 1;
+			}
 		},
 	},
 
@@ -159,7 +155,6 @@ export const filmsInfoSlice = createSlice({
 
 			.addCase(
 				getCollection.fulfilled, (state, actions) => {
-
 					state[actions.payload.collectionName] = actions.payload.data.items
 					state.films = [...actions.payload.data.items]; // for Films
 					state.catIsLoading = true;

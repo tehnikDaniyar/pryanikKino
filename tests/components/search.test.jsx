@@ -6,8 +6,6 @@ import userEvent from "@testing-library/user-event";
 
 describe('тестирование NumberInput', () => {
 
-
-
 	describe('тестирование базовых функций', () => {
 		const inputTestId = 'feofmrepvm909';
 		const state = '';

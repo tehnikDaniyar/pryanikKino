@@ -28,7 +28,6 @@ export default function Slider({ slides, title, collectionKey }) {
 						key={slideInfo.kinopoiskId}
 						src={slideInfo.posterUrlPreview}
 						alt="slide image"
-						onClick={() => console.log(slideInfo.kinopoiskId)}
 					/>
 					<RatinInd rating={slideInfo.ratingKinopoisk} width='70%'></RatinInd>
 
