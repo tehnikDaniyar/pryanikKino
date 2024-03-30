@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import filmsServices from '../../API/filmsServices';
+import { act } from 'react-dom/test-utils';
 
 export const getFilmsCategories = createAsyncThunk(
 	'filmsInfo/getFilmsCategories',
@@ -120,8 +121,9 @@ export const filmsInfoSlice = createSlice({
 	initialState,
 	reducers: {
 		setCurrentPage: (state, action) => {
-			if (Number.isInteger(action.payload)) {
-				state.currentPage = action.payload;
+			if (!isNaN(action.payload) && action.payload > 0) {
+				const pageNumber = action.payload;
+				state.currentPage = Math.floor(pageNumber);
 			} else {
 				state.currentPage = 1;
 			}
@@ -185,5 +187,5 @@ export const filmsInfoSlice = createSlice({
 			)
 	}
 })
-export const { setFilmsCategories, copyCollectionInFilms, setCurrentPage } = filmsInfoSlice.actions
+export const { setFilmsCategories, copyCollectionInFilms, setCurrentPage, } = filmsInfoSlice.actions
 export default filmsInfoSlice.reducer
