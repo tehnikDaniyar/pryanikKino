@@ -1142,7 +1142,7 @@ describe('test getFilmsCategories', async () => {
 		const dispatch = vi.fn();
 		const thunk = getFilmsCategories();
 		await thunk(dispatch);
-		console.log(dispatch.mock.calls);
+		console.log(dispatch.mock.calls)
 
 		const { calls } = dispatch.mock;
 		const [start, end] = calls;

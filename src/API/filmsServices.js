@@ -16,14 +16,20 @@ export default class filmsServices {
 	}
 
 	static async getCollections(query, page) {
-		const response = await axios.get(`${baseUrl}/collections`, {
-			headers: headers,
-			params: {
-				type: query,
-				page: page,
-			}
-		});
-		return await response.data
+		try {
+			const response = await axios.get(`${baseUrl}/collections`, {
+				headers: headers,
+				params: {
+					type: query,
+					page: page,
+				}
+			});
+			return await response.data
+		} catch (error) {
+			console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11', error);
+			return [];
+		}
+
 	}
 
 	//?genres=17&order=RATING&type=FILM&ratingFrom=0&ratingTo=10&yearFrom=1000&yearTo=3000&page=1

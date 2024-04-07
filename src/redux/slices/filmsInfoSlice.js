@@ -32,13 +32,8 @@ export const getTopFilms = createAsyncThunk(
 export const getCollection = createAsyncThunk(
 	'filmsInfo/getCollection',
 	async function ({ page, collectionName }, { rejectWithValue, dispatch }) {
-		try {
-			const data = await filmsServices.getCollections(collectionName, page);
-			return { collectionName: collectionName, data: data };
-		} catch (error) {
-			console.log(error);
-			return []
-		}
+		const data = await filmsServices.getCollections(collectionName, page);
+		return { collectionName: collectionName, data: data };
 	}
 )
 
@@ -108,6 +103,7 @@ export const initialState = {
 	top200Films: [],
 	TOP_POPULAR_MOVIES: [],
 	TOP_250_MOVIES: [],
+	CATASTROPHE_THEME: [],
 	FAMILY: [],
 	films: [],
 	currentPage: 1,
@@ -129,7 +125,6 @@ export const filmsInfoSlice = createSlice({
 			}
 		},
 	},
-
 	extraReducers: (builder) => {
 		builder
 			.addCase(
@@ -157,10 +152,12 @@ export const filmsInfoSlice = createSlice({
 
 			.addCase(
 				getCollection.fulfilled, (state, actions) => {
-					state[actions.payload.collectionName] = actions.payload.data.items
-					state.films = [...actions.payload.data.items]; // for Films
-					state.catIsLoading = true;
-					state.totalPages = actions.payload.data.totalPages; // for pagination
+					if (actions.payload.data.length !== 0) {
+						state[actions.payload.collectionName] = actions.payload.data.items
+						state.films = [...actions.payload.data.items]; // for Films	
+						state.catIsLoading = true;
+						state.totalPages = actions.payload.data.totalPages; // for pagination
+					}
 				}
 			)
 

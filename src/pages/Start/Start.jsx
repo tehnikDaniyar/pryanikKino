@@ -26,12 +26,15 @@ export default function Start() {
 		dispatch(getCollection({ page: 1, collectionName: "TOP_POPULAR_MOVIES" }))
 		dispatch(getCollection({ page: 1, collectionName: "TOP_250_MOVIES" }))
 		dispatch(getCollection({ page: 1, collectionName: "FAMILY" }))
+		dispatch(getCollection({ page: 1, collectionName: "CATASTROPHE_THEME" }))
+		dispatch(getCollection({ page: 1, collectionName: "NO_NAME" }))
 	}, []);
 
 
 	const topFilms = useSelector(store => store.filmsInfo.TOP_POPULAR_MOVIES);
 	const top200Films = useSelector(store => store.filmsInfo.TOP_250_MOVIES);
 	const family = useSelector(store => store.filmsInfo.FAMILY);
+	const catastrophe = useSelector(store => store.filmsInfo.CATASTROPHE_THEME);
 
 
 
@@ -47,6 +50,9 @@ export default function Start() {
 				</div>
 				<div className={styles.slider}>
 					{getSlider(family, 'Семейное кино', "FAMILY")}
+				</div>
+				<div className={styles.slider}>
+					{getSlider(catastrophe, 'Фильмы Катастрофы', "CATASTROPHE_THEME")}
 				</div>
 			</div>
 
